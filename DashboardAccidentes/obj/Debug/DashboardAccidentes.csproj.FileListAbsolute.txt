@@ -1,0 +1,11 @@
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\bin\Debug\DashboardAccidentes.exe.config
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\bin\Debug\DashboardAccidentes.exe
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\bin\Debug\DashboardAccidentes.pdb
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.csprojAssemblyReference.cache
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.Properties.Resources.resources
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.csproj.GenerateResource.cache
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.csproj.CoreCompileInputs.cache
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.exe
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.pdb
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.FormInicial.resources
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.Vista.FormConsultaDinamica.resources
