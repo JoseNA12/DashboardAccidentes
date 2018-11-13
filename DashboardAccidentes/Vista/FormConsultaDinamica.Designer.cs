@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("");
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.pnlMenuGroup_distritos = new System.Windows.Forms.Panel();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBox_distritos = new System.Windows.Forms.CheckedListBox();
             this.btn_distritos = new System.Windows.Forms.Button();
             this.pnlMenuGroup_cantones = new System.Windows.Forms.Panel();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBox_cantones = new System.Windows.Forms.CheckedListBox();
             this.btn_cantones = new System.Windows.Forms.Button();
             this.pnlMenuGroup_provincias = new System.Windows.Forms.Panel();
             this.checkedListBox_provincias = new System.Windows.Forms.CheckedListBox();
@@ -102,7 +102,7 @@
             // 
             // pnlMenuGroup_distritos
             // 
-            this.pnlMenuGroup_distritos.Controls.Add(this.checkedListBox2);
+            this.pnlMenuGroup_distritos.Controls.Add(this.checkedListBox_distritos);
             this.pnlMenuGroup_distritos.Controls.Add(this.btn_distritos);
             this.pnlMenuGroup_distritos.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenuGroup_distritos.Location = new System.Drawing.Point(0, 270);
@@ -110,26 +110,16 @@
             this.pnlMenuGroup_distritos.Size = new System.Drawing.Size(261, 135);
             this.pnlMenuGroup_distritos.TabIndex = 4;
             // 
-            // checkedListBox2
+            // checkedListBox_distritos
             // 
-            this.checkedListBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkedListBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Items.AddRange(new object[] {
-            "Distrito 1",
-            "Distrito 2",
-            "Distrito 3",
-            "Distrito 4",
-            "Distrito 5",
-            "Distrito 6",
-            "Distrito 7",
-            "Distrito 8",
-            "Distrito 9",
-            "Distrito 10"});
-            this.checkedListBox2.Location = new System.Drawing.Point(0, 25);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(261, 106);
-            this.checkedListBox2.TabIndex = 1;
+            this.checkedListBox_distritos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkedListBox_distritos.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkedListBox_distritos.FormattingEnabled = true;
+            this.checkedListBox_distritos.Location = new System.Drawing.Point(0, 25);
+            this.checkedListBox_distritos.Name = "checkedListBox_distritos";
+            this.checkedListBox_distritos.Size = new System.Drawing.Size(261, 106);
+            this.checkedListBox_distritos.TabIndex = 1;
+            this.checkedListBox_distritos.SelectedIndexChanged += new System.EventHandler(this.checkedListBox_distritos_SelectedIndexChanged);
             // 
             // btn_distritos
             // 
@@ -150,7 +140,7 @@
             // 
             // pnlMenuGroup_cantones
             // 
-            this.pnlMenuGroup_cantones.Controls.Add(this.checkedListBox1);
+            this.pnlMenuGroup_cantones.Controls.Add(this.checkedListBox_cantones);
             this.pnlMenuGroup_cantones.Controls.Add(this.btn_cantones);
             this.pnlMenuGroup_cantones.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMenuGroup_cantones.Location = new System.Drawing.Point(0, 134);
@@ -158,20 +148,16 @@
             this.pnlMenuGroup_cantones.Size = new System.Drawing.Size(261, 136);
             this.pnlMenuGroup_cantones.TabIndex = 3;
             // 
-            // checkedListBox1
+            // checkedListBox_cantones
             // 
-            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "Canton 1",
-            "Canton 2",
-            "Canton 3",
-            "Canton 4"});
-            this.checkedListBox1.Location = new System.Drawing.Point(0, 25);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(261, 106);
-            this.checkedListBox1.TabIndex = 5;
+            this.checkedListBox_cantones.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkedListBox_cantones.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkedListBox_cantones.FormattingEnabled = true;
+            this.checkedListBox_cantones.Location = new System.Drawing.Point(0, 25);
+            this.checkedListBox_cantones.Name = "checkedListBox_cantones";
+            this.checkedListBox_cantones.Size = new System.Drawing.Size(261, 106);
+            this.checkedListBox_cantones.TabIndex = 5;
+            this.checkedListBox_cantones.SelectedIndexChanged += new System.EventHandler(this.checkedListBox_cantones_SelectedIndexChanged);
             // 
             // btn_cantones
             // 
@@ -206,18 +192,11 @@
             this.checkedListBox_provincias.Dock = System.Windows.Forms.DockStyle.Top;
             this.checkedListBox_provincias.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkedListBox_provincias.FormattingEnabled = true;
-            this.checkedListBox_provincias.Items.AddRange(new object[] {
-            "Provincia 1",
-            "Provincia 2",
-            "Provincia 3",
-            "Provincia 4",
-            "Provincia 5",
-            "Provincia 6",
-            "Provincia 7"});
             this.checkedListBox_provincias.Location = new System.Drawing.Point(0, 25);
             this.checkedListBox_provincias.Name = "checkedListBox_provincias";
             this.checkedListBox_provincias.Size = new System.Drawing.Size(261, 106);
             this.checkedListBox_provincias.TabIndex = 10;
+            this.checkedListBox_provincias.SelectedIndexChanged += new System.EventHandler(this.checkedListBox_provincias_SelectedIndexChanged);
             // 
             // btn_provincias
             // 
@@ -400,15 +379,15 @@
             this.columna_indicador,
             this.columna_valor});
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            listViewGroup1.Header = "Mi Busqueda";
-            listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            listViewGroup1.Name = "Mi Busqueda";
+            listViewGroup4.Header = "Mi Busqueda";
+            listViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            listViewGroup4.Name = "Mi Busqueda";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
-            listViewItem1.Group = listViewGroup1;
-            listViewItem1.Tag = "";
+            listViewGroup4});
+            listViewItem4.Group = listViewGroup4;
+            listViewItem4.Tag = "";
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem4});
             this.listView1.Location = new System.Drawing.Point(0, 3);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(261, 168);
@@ -480,9 +459,9 @@
         private System.Windows.Forms.Panel pnlMenuGroup_provincias;
         private System.Windows.Forms.Button btn_provincias;
         private System.Windows.Forms.CheckedListBox checkedListBox_provincias;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox checkedListBox_cantones;
         private System.Windows.Forms.Panel pnlMenuGroup_distritos;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.CheckedListBox checkedListBox_distritos;
         private System.Windows.Forms.Button btn_distritos;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;

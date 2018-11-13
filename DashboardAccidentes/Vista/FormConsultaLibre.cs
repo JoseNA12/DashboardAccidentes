@@ -16,5 +16,10 @@ namespace DashboardAccidentes.Vista
         {
             InitializeComponent();
         }
+
+        private void FormConsultaLibre_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

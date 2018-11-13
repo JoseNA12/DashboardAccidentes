@@ -9,3 +9,5 @@ C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debu
 C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.pdb
 C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.FormInicial.resources
 C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.Vista.FormConsultaDinamica.resources
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.Vista.FormConsultaIndicadores.resources
+C:\Users\jose_\Documents\GitHub\DashboardAccidentes\DashboardAccidentes\obj\Debug\DashboardAccidentes.Vista.FormConsultaLibre.resources
