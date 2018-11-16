@@ -82,6 +82,7 @@
             this.grafico_consulta_indicadores.Location = new System.Drawing.Point(33, 77);
             this.grafico_consulta_indicadores.Name = "grafico_consulta_indicadores";
             series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.grafico_consulta_indicadores.Series.Add(series1);

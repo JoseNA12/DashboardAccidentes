@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Negocio\Controlador.cs" />
     <Compile Include="Negocio\DAO_Carga.cs" />
+    <Compile Include="Negocio\DAO_Query.cs" />
     <Compile Include="Negocio\DAO_SQL.cs" />
     <Compile Include="Negocio\DTO.cs" />
     <Compile Include="Negocio\TipoIdentificador.cs" />
