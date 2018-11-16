@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,25 +11,25 @@ namespace DashboardAccidentes.Negocio
     public class DAO_Query : DAO_SQL
     {
         //Lista de tareas pendientes en esta clase:
-        //  * TODO: a cada metodo ponerle el tipo de retorno. 
-        //          lo ideal es que sea una clase intermedia que no dependa de un ResultSet o algo asi.
         //  * TODO: Agregar un parametro de tipo QueryDinamica a correrQueryDinamico
         //  * TODO: Programar correrQueryDinamico
-        //  * TODO: Programar correrQueryIndicador
         //  * TODO: Programar correrQueryLibre
+        //  * TODO: Hacer que DAO_Query sea cliente de DatosGrafico segun el patron observer (Ver UML).
 
-        public void correrQueryDinamico()
+        public DataTable correrQueryDinamico()
         {
-
+            return null;
         }
 
-        public void correrQueryIndicador(string indicador)
+        public DataTable correrQueryIndicador(string indicador)
         {
+            string query = Properties.Resources.ResourceManager.GetString("QUERY_" + indicador);
+            return RealizarConsulta(query);
         }
 
-        public void correrQueryLibre()
+        public DataTable correrQueryLibre()
         {
-
+            return null;
         }
     }
 }
