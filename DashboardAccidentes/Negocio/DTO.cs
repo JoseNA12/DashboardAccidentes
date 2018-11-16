@@ -12,24 +12,17 @@ namespace DashboardAccidentes.Negocio
         private List<string> cantones;
         private List<string> distritos;
         private List<string> anios;
-        private List<string> indicadores;
-        private List<string> tiposAfectados;
-        private List<string> generos;
-        private List<string> tiposLesiones;
-        private List<string> edadesQuincenales;
+        private List<string> indicadores; // solo cargar info
+        private Dictionary<string, string> misIndicadores; // indicadores del usuario cuando consulta
         private List<string> generico; // utilizado para transportar los datos cuando el usuario selecciona una provincia, indicador, etc. (más que todo por la sobrecarga de constructores)
 
-        public DTO(List<string> provincias, List<string> cantones, List<string> distritos, List<string> indicadores, List<string> anios, List<string> tiposAfectados, List<string> generos, List<string> tiposLesiones, List<string> edadesQuincenales)
+        public DTO(List<string> provincias, List<string> cantones, List<string> distritos, List<string> indicadores, List<string> anios)
         {
             this.provincias = provincias;
             this.cantones = cantones;
             this.distritos = distritos;
             this.anios = anios;
             this.indicadores = indicadores;
-            this.tiposAfectados = tiposAfectados;
-            this.generos = generos;
-            this.tiposLesiones = tiposLesiones;
-            this.edadesQuincenales = edadesQuincenales;
         }
 
         public DTO(List<string> provincias, List<string> anios, List<string> indicadores)
@@ -42,6 +35,15 @@ namespace DashboardAccidentes.Negocio
         public DTO(List<string> generico)
         {
             this.generico = generico;
+        }
+
+        public DTO(List<string> provincias, List<string> cantones, List<string> distritos, List<string> anios, Dictionary<string, string> misIndicadores)
+        {
+            this.provincias = provincias;
+            this.cantones = cantones;
+            this.distritos = distritos;
+            this.anios = anios;
+            this.misIndicadores = misIndicadores;
         }
 
         public List<string> getProvincias()
@@ -69,29 +71,14 @@ namespace DashboardAccidentes.Negocio
             return indicadores;
         }
 
-        public List<string> getTiposAfectados()
-        {
-            return tiposAfectados;
-        }
-
-        public List<string> getGeneros()
-        {
-            return generos;
-        }
-
-        public List<string> getTiposLesiones()
-        {
-            return tiposLesiones;
-        }
-
-        public List<string> getEdadesQuincenales()
-        {
-            return edadesQuincenales;
-        }
-
         public List<string> getGenerico()
         {
             return generico;
+        }
+
+        public Dictionary<string, string> getMisIndicadores()
+        {
+            return misIndicadores;
         }
     }
 }

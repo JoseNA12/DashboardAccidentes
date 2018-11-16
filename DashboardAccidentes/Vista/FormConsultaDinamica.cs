@@ -23,13 +23,7 @@ namespace DashboardAccidentes.Vista
         private void FormConsultaDinamica_Load(object sender, EventArgs e)
         {
             ConfigurarComponentes();
-            miControlador = new Controlador();
-            DTO miCarrito = miControlador.CargarDatosConsultaDinamica();
-
-            comboBox_fechaInicial.Items.AddRange(miCarrito.getAnios().ToArray());
-            comboBox_fechaFinal.Items.AddRange(miCarrito.getAnios().ToArray());
-            checkedListBox_provincias.Items.AddRange(miCarrito.getProvincias().ToArray());
-            comboBox_indicador.Items.AddRange(miCarrito.getIndicadores().ToArray());
+            CargarDatos();
         }
 
         #region Lógica IU (Handler's, botones, paneles, etc)
@@ -145,16 +139,40 @@ namespace DashboardAccidentes.Vista
         }
         #endregion
 
+        private void CargarDatos()
+        {
+            miControlador = new Controlador();
+            DTO miCarrito = miControlador.CargarDatos();
+
+            comboBox_fechaInicial.Items.AddRange(miCarrito.getAnios().ToArray());
+            comboBox_fechaFinal.Items.AddRange(miCarrito.getAnios().ToArray());
+            checkedListBox_provincias.Items.AddRange(miCarrito.getProvincias().ToArray());
+            comboBox_indicador.Items.AddRange(DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
+
+            comboBox_fechaFinal.Items.Add("Sin año");
+        }
+
         private void checkedListBox_provincias_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int cantidadSeleccionados = checkedListBox_provincias.CheckedItems.Count;
+            //string s;
+            //s = "Checked items:\n";
+            int cantidadSeleccionados = 0;
+
+            for (int i = 0; i <= (checkedListBox_provincias.Items.Count - 1); i++)
+            {
+                if (checkedListBox_provincias.GetItemChecked(i))
+                {
+                    cantidadSeleccionados++;
+                    //s = s + "Item " + (i + 1).ToString() + " = " + checkedListBox_provincias.Items[i].ToString() + "\n";
+                }
+            }
 
             if (cantidadSeleccionados == 1)
             {
                 DTO miCarrito = miControlador.getCantones(new DTO
-                    (
-                    new List<string> { checkedListBox_provincias.CheckedItems[0].ToString() })
-                    );
+                                    (
+                                    new List<string> { checkedListBox_provincias.CheckedItems[0].ToString() })
+                                    );
 
                 checkedListBox_cantones.Items.AddRange(miCarrito.getGenerico().ToArray());
             }
@@ -167,16 +185,24 @@ namespace DashboardAccidentes.Vista
 
         private void checkedListBox_cantones_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int cantidadSeleccionados = checkedListBox_cantones.CheckedItems.Count;
+            int cantidadSeleccionados = 0;
+
+            for (int i = 0; i <= (checkedListBox_cantones.Items.Count - 1); i++)
+            {
+                if (checkedListBox_cantones.GetItemChecked(i))
+                {
+                    cantidadSeleccionados++;
+                }
+            }
 
             if (cantidadSeleccionados == 1)
             {
                 DTO miCarrito = miControlador.getDistritos(new DTO
-                    (
-                    new List<string> { checkedListBox_cantones.CheckedItems[0].ToString() })
-                    );
+                                    (
+                                    new List<string> { checkedListBox_cantones.CheckedItems[0].ToString() })
+                                    );
 
-                checkedListBox_distritos.Items.AddRange(miCarrito.getGenerico().ToArray());
+                    checkedListBox_distritos.Items.AddRange(miCarrito.getGenerico().ToArray());
             }
             else
             {
@@ -184,11 +210,135 @@ namespace DashboardAccidentes.Vista
             }
         }
 
-        private void checkedListBox_distritos_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox_indicador_TextChanged(object sender, EventArgs e)
         {
+            comboBox_valorIndicador.Items.Clear();
 
+            DTO miCarrito = miControlador.getValores_De_Indicador(
+                FormatearEnumIdicadores(comboBox_indicador.SelectedItem.ToString()));
+
+            comboBox_valorIndicador.Items.AddRange(miCarrito.getGenerico().ToArray());
         }
 
-        
+        private void btn_agregarIndicador_Click(object sender, EventArgs e)
+        {
+            bool puedoAgregar = true;
+            if (comboBox_indicador.SelectedItem != null && comboBox_valorIndicador.SelectedItem != null)
+            {
+                foreach (ListViewItem itemRow in this.listView_misIndicadores.Items)
+                {
+                    if (comboBox_indicador.SelectedItem.Equals(itemRow.SubItems[0].Text))
+                    {
+                        puedoAgregar = false;
+                    }
+                }
+
+                if (puedoAgregar)
+                {
+                    ListViewItem items = new ListViewItem(new string[]
+                                    { comboBox_indicador.SelectedItem.ToString(), comboBox_valorIndicador.SelectedItem.ToString() });
+
+                    listView_misIndicadores.Items.AddRange(new ListViewItem[] { items });
+                }
+                else
+                {
+                    MessageBox.Show("Error, el indicador ya ha sido registrado!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error, los campos del indicador y el valor deben tener un valor seleccionado!");
+            }
+        }
+
+        private void btn_eliminarIndicador_Click(object sender, EventArgs e)
+        {
+            if (listView_misIndicadores.SelectedIndices.Count > 0)
+            {
+                listView_misIndicadores.SelectedItems[0].Remove();
+            }
+            else
+            {
+                MessageBox.Show("Error, debe seleccionar un indicador para poder eliminarlo de su busqueda!");
+            }
+        }
+
+        private void btn_consultar_Click(object sender, EventArgs e)
+        {
+            // HACER LA VALIDACIONES NECESARIAS
+
+            // Provincias
+            List<string> misProvincias = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_provincias.Items.Count - 1); i++)
+            {
+                if (checkedListBox_provincias.GetItemChecked(i))
+                {
+                    misProvincias.Add(checkedListBox_provincias.Items[i].ToString());
+                }
+            }
+
+            // Cantones
+            List<string> misCantones = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_cantones.Items.Count - 1); i++)
+            {
+                if (checkedListBox_cantones.GetItemChecked(i))
+                {
+                    misCantones.Add(checkedListBox_cantones.Items[i].ToString());
+                }
+            }
+
+            // Distritos
+            List<string> misDistritos = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_distritos.Items.Count - 1); i++)
+            {
+                if (checkedListBox_distritos.GetItemChecked(i))
+                {
+                    misCantones.Add(checkedListBox_distritos.Items[i].ToString());
+                }
+            }
+
+            // Indicadores
+            Dictionary<string, string> misIndicadores = new Dictionary<string, string>();
+            //       <indicador, valor>
+
+            foreach (ListViewItem itemRow in this.listView_misIndicadores.Items)
+            {
+                misIndicadores.Add(itemRow.SubItems[0].Text, itemRow.SubItems[1].Text);
+            }
+
+            // Años
+            string anioInicio = comboBox_fechaInicial.SelectedText;
+            string anioFinal = "";
+            if (!comboBox_fechaFinal.SelectedText.Equals("Sin año")) { anioFinal = comboBox_fechaFinal.SelectedText; }
+
+            List<string> anios = new List<string>(); anios.Add(anioInicio); anios.Add(anioFinal);
+
+
+
+            // RESULTADO PARA ENVIAR
+            DTO miLambo = new DTO(misProvincias, misCantones, misCantones, anios, misIndicadores);
+            miControlador.RealizarConsultaDinamica(miLambo);
+        }
+
+        // Una vez recibidos los nonmbre de los enum's, tratar los strings para ser mostrador en pantalla
+        private List<string> DarFormatoEnumIndicador(List<string> pIndicadores)
+        {
+            List<string> indicadores = new List<string>();
+
+            for(int i = 0; i < pIndicadores.Count; i++)
+            {
+                indicadores.Add(pIndicadores[i].Replace("_", " "));
+            }
+            return indicadores;
+        }
+
+        // Para cuando envio al controlador el indicador que seleccioné, enviarle el mismo nombre "original" del enum como tal
+        private string FormatearEnumIdicadores(string pIndicador)
+        {
+            return pIndicador.Replace(" ", "_");
+        }
     }
 }

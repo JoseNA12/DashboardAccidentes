@@ -157,6 +157,7 @@
     <Content Include="Resources\down.png" />
     <Content Include="Resources\down1.png" />
     <None Include="Resources\plus_64.png" />
+    <None Include="Resources\eliminar_64.png" />
     <Content Include="Resources\up.png" />
     <Content Include="Resources\up1.png" />
   </ItemGroup>

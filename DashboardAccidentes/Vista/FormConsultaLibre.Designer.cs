@@ -33,9 +33,9 @@
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_consultar = new System.Windows.Forms.Button();
-            this.comboBox_indicador = new System.Windows.Forms.ComboBox();
+            this.comboBox_provincias = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox_anios = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.grafico_consulta_libre = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.grafico_consulta_libre)).BeginInit();
@@ -65,15 +65,15 @@
             this.btn_consultar.Text = "Consultar";
             this.btn_consultar.UseVisualStyleBackColor = false;
             // 
-            // comboBox_indicador
+            // comboBox_provincias
             // 
-            this.comboBox_indicador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_indicador.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_indicador.FormattingEnabled = true;
-            this.comboBox_indicador.Location = new System.Drawing.Point(121, 542);
-            this.comboBox_indicador.Name = "comboBox_indicador";
-            this.comboBox_indicador.Size = new System.Drawing.Size(129, 24);
-            this.comboBox_indicador.TabIndex = 28;
+            this.comboBox_provincias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_provincias.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_provincias.FormattingEnabled = true;
+            this.comboBox_provincias.Location = new System.Drawing.Point(121, 542);
+            this.comboBox_provincias.Name = "comboBox_provincias";
+            this.comboBox_provincias.Size = new System.Drawing.Size(129, 24);
+            this.comboBox_provincias.TabIndex = 28;
             // 
             // label1
             // 
@@ -85,15 +85,15 @@
             this.label1.TabIndex = 27;
             this.label1.Text = "Provincia:";
             // 
-            // comboBox1
+            // comboBox_anios
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(332, 542);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(129, 24);
-            this.comboBox1.TabIndex = 30;
+            this.comboBox_anios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_anios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_anios.FormattingEnabled = true;
+            this.comboBox_anios.Location = new System.Drawing.Point(332, 542);
+            this.comboBox_anios.Name = "comboBox_anios";
+            this.comboBox_anios.Size = new System.Drawing.Size(129, 24);
+            this.comboBox_anios.TabIndex = 30;
             // 
             // label3
             // 
@@ -128,9 +128,9 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(966, 609);
             this.Controls.Add(this.grafico_consulta_libre);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.comboBox_anios);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox_indicador);
+            this.Controls.Add(this.comboBox_provincias);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_consultar);
@@ -147,9 +147,9 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_consultar;
-        private System.Windows.Forms.ComboBox comboBox_indicador;
+        private System.Windows.Forms.ComboBox comboBox_provincias;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox_anios;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataVisualization.Charting.Chart grafico_consulta_libre;
     }

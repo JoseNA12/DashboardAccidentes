@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DashboardAccidentes.Negocio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,7 @@ namespace DashboardAccidentes.Vista
 {
     public partial class FormConsultaIndicadores : Form
     {
+        private Controlador miControlador;
 
         public FormConsultaIndicadores()
         {
@@ -23,6 +25,12 @@ namespace DashboardAccidentes.Vista
 
         private void FormConsultaIndicadores_Load(object sender, EventArgs e)
         {
+            CargarDatos();
+            
+
+
+            // PRUEBAS DE LA GRAFICA (quitar luego)
+
             //Get the DISTINCT Countries.
             List<string> countries = new List<string>();
             countries.Add("San José");
@@ -54,6 +62,26 @@ namespace DashboardAccidentes.Vista
             }
 
             grafico_consulta_indicadores.Legends[0].Enabled = true;
+        }
+
+        private void CargarDatos()
+        {
+            miControlador = new Controlador();
+            DTO miCarrito = miControlador.CargarDatos();
+
+            comboBox_indicador.Items.AddRange(DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
+        }
+
+        // Una vez recibidos los nonmbre de los enum's, tratar los strings para ser mostrador en pantalla
+        private List<string> DarFormatoEnumIndicador(List<string> pIndicadores)
+        {
+            List<string> indicadores = new List<string>();
+
+            for (int i = 0; i < pIndicadores.Count; i++)
+            {
+                indicadores.Add(pIndicadores[i].Replace("_", " "));
+            }
+            return indicadores;
         }
     }
 }
