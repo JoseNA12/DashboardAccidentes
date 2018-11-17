@@ -81,7 +81,7 @@
             this.grafico_consulta_indicadores.Legends.Add(legend1);
             this.grafico_consulta_indicadores.Location = new System.Drawing.Point(33, 77);
             this.grafico_consulta_indicadores.Name = "grafico_consulta_indicadores";
-            this.grafico_consulta_indicadores.Size = new System.Drawing.Size(876, 438);
+            this.grafico_consulta_indicadores.Size = new System.Drawing.Size(1116, 510);
             this.grafico_consulta_indicadores.TabIndex = 23;
             this.grafico_consulta_indicadores.Text = "chart1";
             // 

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup6 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -49,17 +49,18 @@
             this.comboBox_fechaFinal = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.panel_indicadores = new System.Windows.Forms.Panel();
+            this.btn_agregarIndicador = new System.Windows.Forms.Button();
             this.comboBox_valorIndicador = new System.Windows.Forms.ComboBox();
             this.comboBox_indicador = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel_mi_busqueda = new System.Windows.Forms.Panel();
+            this.btn_eliminarIndicador = new System.Windows.Forms.Button();
             this.listView_misIndicadores = new System.Windows.Forms.ListView();
             this.columna_indicador = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columna_valor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_consultar = new System.Windows.Forms.Button();
-            this.btn_eliminarIndicador = new System.Windows.Forms.Button();
-            this.btn_agregarIndicador = new System.Windows.Forms.Button();
+            this.pb_imagenMapa = new System.Windows.Forms.PictureBox();
             this.pnlMenu.SuspendLayout();
             this.pnlMenuGroup_distritos.SuspendLayout();
             this.pnlMenuGroup_cantones.SuspendLayout();
@@ -67,6 +68,7 @@
             this.panel_anios.SuspendLayout();
             this.panel_indicadores.SuspendLayout();
             this.panel_mi_busqueda.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_imagenMapa)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -305,6 +307,21 @@
             this.panel_indicadores.Size = new System.Drawing.Size(312, 78);
             this.panel_indicadores.TabIndex = 17;
             // 
+            // btn_agregarIndicador
+            // 
+            this.btn_agregarIndicador.BackColor = System.Drawing.Color.LimeGreen;
+            this.btn_agregarIndicador.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_agregarIndicador.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_agregarIndicador.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_agregarIndicador.ForeColor = System.Drawing.Color.White;
+            this.btn_agregarIndicador.Location = new System.Drawing.Point(222, 0);
+            this.btn_agregarIndicador.Name = "btn_agregarIndicador";
+            this.btn_agregarIndicador.Size = new System.Drawing.Size(90, 25);
+            this.btn_agregarIndicador.TabIndex = 18;
+            this.btn_agregarIndicador.Text = "Agregar";
+            this.btn_agregarIndicador.UseVisualStyleBackColor = false;
+            this.btn_agregarIndicador.Click += new System.EventHandler(this.btn_agregarIndicador_Click);
+            // 
             // comboBox_valorIndicador
             // 
             this.comboBox_valorIndicador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -355,17 +372,32 @@
             this.panel_mi_busqueda.Size = new System.Drawing.Size(312, 174);
             this.panel_mi_busqueda.TabIndex = 18;
             // 
+            // btn_eliminarIndicador
+            // 
+            this.btn_eliminarIndicador.BackColor = System.Drawing.Color.DarkRed;
+            this.btn_eliminarIndicador.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btn_eliminarIndicador.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_eliminarIndicador.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_eliminarIndicador.ForeColor = System.Drawing.Color.White;
+            this.btn_eliminarIndicador.Location = new System.Drawing.Point(222, 3);
+            this.btn_eliminarIndicador.Name = "btn_eliminarIndicador";
+            this.btn_eliminarIndicador.Size = new System.Drawing.Size(90, 25);
+            this.btn_eliminarIndicador.TabIndex = 20;
+            this.btn_eliminarIndicador.Text = "Eliminar";
+            this.btn_eliminarIndicador.UseVisualStyleBackColor = false;
+            this.btn_eliminarIndicador.Click += new System.EventHandler(this.btn_eliminarIndicador_Click);
+            // 
             // listView_misIndicadores
             // 
             this.listView_misIndicadores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columna_indicador,
             this.columna_valor});
             this.listView_misIndicadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            listViewGroup6.Header = "Mi Busqueda";
-            listViewGroup6.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            listViewGroup6.Name = "miBusqueda";
+            listViewGroup1.Header = "Mi Busqueda";
+            listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            listViewGroup1.Name = "miBusqueda";
             this.listView_misIndicadores.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup6});
+            listViewGroup1});
             this.listView_misIndicadores.Location = new System.Drawing.Point(0, 3);
             this.listView_misIndicadores.Name = "listView_misIndicadores";
             this.listView_misIndicadores.Size = new System.Drawing.Size(312, 168);
@@ -398,42 +430,21 @@
             this.btn_consultar.UseVisualStyleBackColor = false;
             this.btn_consultar.Click += new System.EventHandler(this.btn_consultar_Click);
             // 
-            // btn_eliminarIndicador
+            // pb_imagenMapa
             // 
-            this.btn_eliminarIndicador.BackColor = System.Drawing.Color.DarkRed;
-            this.btn_eliminarIndicador.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_eliminarIndicador.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_eliminarIndicador.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_eliminarIndicador.ForeColor = System.Drawing.Color.White;
-            this.btn_eliminarIndicador.Location = new System.Drawing.Point(222, 3);
-            this.btn_eliminarIndicador.Name = "btn_eliminarIndicador";
-            this.btn_eliminarIndicador.Size = new System.Drawing.Size(90, 25);
-            this.btn_eliminarIndicador.TabIndex = 20;
-            this.btn_eliminarIndicador.Text = "Eliminar";
-            this.btn_eliminarIndicador.UseVisualStyleBackColor = false;
-            this.btn_eliminarIndicador.Click += new System.EventHandler(this.btn_eliminarIndicador_Click);
-            // 
-            // btn_agregarIndicador
-            // 
-            this.btn_agregarIndicador.BackColor = System.Drawing.Color.LimeGreen;
-            this.btn_agregarIndicador.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btn_agregarIndicador.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_agregarIndicador.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_agregarIndicador.ForeColor = System.Drawing.Color.White;
-            this.btn_agregarIndicador.Location = new System.Drawing.Point(222, 0);
-            this.btn_agregarIndicador.Name = "btn_agregarIndicador";
-            this.btn_agregarIndicador.Size = new System.Drawing.Size(90, 25);
-            this.btn_agregarIndicador.TabIndex = 18;
-            this.btn_agregarIndicador.Text = "Agregar";
-            this.btn_agregarIndicador.UseVisualStyleBackColor = false;
-            this.btn_agregarIndicador.Click += new System.EventHandler(this.btn_agregarIndicador_Click);
+            this.pb_imagenMapa.Location = new System.Drawing.Point(31, 61);
+            this.pb_imagenMapa.Name = "pb_imagenMapa";
+            this.pb_imagenMapa.Size = new System.Drawing.Size(676, 520);
+            this.pb_imagenMapa.TabIndex = 20;
+            this.pb_imagenMapa.TabStop = false;
             // 
             // FormConsultaDinamica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1084, 641);
+            this.ClientSize = new System.Drawing.Size(1084, 624);
+            this.Controls.Add(this.pb_imagenMapa);
             this.Controls.Add(this.btn_consultar);
             this.Controls.Add(this.panel_mi_busqueda);
             this.Controls.Add(this.panel_indicadores);
@@ -453,6 +464,7 @@
             this.panel_indicadores.ResumeLayout(false);
             this.panel_indicadores.PerformLayout();
             this.panel_mi_busqueda.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pb_imagenMapa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,5 +503,6 @@
         private System.Windows.Forms.Button btn_consultar;
         private System.Windows.Forms.CheckedListBox checkedListBox_cantones;
         private System.Windows.Forms.Button btn_eliminarIndicador;
+        private System.Windows.Forms.PictureBox pb_imagenMapa;
     }
 }

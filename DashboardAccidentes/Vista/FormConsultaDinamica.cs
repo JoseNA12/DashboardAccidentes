@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -321,6 +323,43 @@ namespace DashboardAccidentes.Vista
             // RESULTADO PARA ENVIAR
             DTO miLambo = new DTO(misProvincias, misCantones, misCantones, anios, misIndicadores);
             miControlador.RealizarConsultaDinamica(miLambo);
+
+            ObtenerImagenMapa();
+        }
+
+        private void ObtenerImagenMapa()
+        {
+            // Guias
+            // https://developers.google.com/maps/documentation/maps-static/dev-guide
+            // https://csharp.hotexamples.com/examples/System.Windows.Forms/PictureBox/Load/php-picturebox-load-method-examples.html
+            // https://developers.google.com/maps/documentation/maps-static/intro?csw=1
+            // --------------
+            string googleKey = "AIzaSyAlGxbrgV3WwONSCkyNwkSXibsuupQgXzk"; // NO modificar
+
+            string dir = "https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=400x400&markers=color:blue|label:S|62.107733,-145.541936&markers=size:tiny|color:green|Delta+Junction,AK&markers=size:mid|color:0xFFFF00|label:C|Tok,AK&key=" + googleKey;
+            string dir_2 = "https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=13&size=600x300&maptype=roadmap " +
+                   " & markers = color:blue % 7Clabel: S % 7C40.702147,-74.015794 & markers = color:green % 7Clabel: G % 7C40.711614,-74.012318" +
+                   "& markers = color:red % 7Clabel: C % 7C40.718217,-73.998284" +
+                   "& key = " + googleKey;
+
+            Uri uri = new Uri(dir);
+
+            /*using (WebClient client = new WebClient())
+            {
+                client.DownloadFile(new Uri(dir), @"C:\Users\jose_\Documents\Tec\staticmap.png");
+            }*/
+
+            HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(uri);
+
+            HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+            Stream imageStream = httpResponse.GetResponseStream();
+            Bitmap buddyIcon = new Bitmap(imageStream);
+            httpResponse.Close();
+            imageStream.Close();
+
+            //Load Image
+            pb_imagenMapa.Image = buddyIcon;
+
         }
 
         // Una vez recibidos los nonmbre de los enum's, tratar los strings para ser mostrador en pantalla

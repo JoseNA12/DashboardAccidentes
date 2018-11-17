@@ -58,7 +58,7 @@
             this.btn_consultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_consultar.ForeColor = System.Drawing.SystemColors.Control;
             this.btn_consultar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_consultar.Location = new System.Drawing.Point(662, 535);
+            this.btn_consultar.Location = new System.Drawing.Point(862, 604);
             this.btn_consultar.Name = "btn_consultar";
             this.btn_consultar.Size = new System.Drawing.Size(261, 35);
             this.btn_consultar.TabIndex = 25;
@@ -71,7 +71,7 @@
             this.comboBox_provincias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_provincias.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_provincias.FormattingEnabled = true;
-            this.comboBox_provincias.Location = new System.Drawing.Point(121, 542);
+            this.comboBox_provincias.Location = new System.Drawing.Point(783, 37);
             this.comboBox_provincias.Name = "comboBox_provincias";
             this.comboBox_provincias.Size = new System.Drawing.Size(129, 24);
             this.comboBox_provincias.TabIndex = 28;
@@ -80,7 +80,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(44, 545);
+            this.label1.Location = new System.Drawing.Point(706, 40);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 17);
             this.label1.TabIndex = 27;
@@ -91,7 +91,7 @@
             this.comboBox_anios.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_anios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_anios.FormattingEnabled = true;
-            this.comboBox_anios.Location = new System.Drawing.Point(332, 542);
+            this.comboBox_anios.Location = new System.Drawing.Point(994, 37);
             this.comboBox_anios.Name = "comboBox_anios";
             this.comboBox_anios.Size = new System.Drawing.Size(129, 24);
             this.comboBox_anios.TabIndex = 30;
@@ -100,7 +100,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(289, 545);
+            this.label3.Location = new System.Drawing.Point(951, 40);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 17);
             this.label3.TabIndex = 29;
@@ -118,7 +118,7 @@
             this.grafico_consulta_libre.Legends.Add(legend1);
             this.grafico_consulta_libre.Location = new System.Drawing.Point(38, 74);
             this.grafico_consulta_libre.Name = "grafico_consulta_libre";
-            this.grafico_consulta_libre.Size = new System.Drawing.Size(885, 446);
+            this.grafico_consulta_libre.Size = new System.Drawing.Size(1085, 524);
             this.grafico_consulta_libre.TabIndex = 31;
             this.grafico_consulta_libre.Text = "chart1";
             title1.DockedToChartArea = "ChartArea1";
@@ -132,7 +132,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(966, 609);
+            this.ClientSize = new System.Drawing.Size(1184, 681);
             this.Controls.Add(this.grafico_consulta_libre);
             this.Controls.Add(this.comboBox_anios);
             this.Controls.Add(this.label3);
