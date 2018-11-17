@@ -16,8 +16,8 @@ namespace DashboardAccidentes.Negocio
         public DataTable RealizarConsulta(string query)
         {
             //string constr = @"";
-            string constr = @"Data Source=JOSENA-PC;Initial Catalog=AccidentesBD;Integrated Security=True";
-            //string constr = @"Data Source=DESKTOP-DAVIDCR\SQLEXPRESS;Initial Catalog=AccidentesBD;Integrated Security=True";
+            //string constr = @"Data Source=JOSENA-PC;Initial Catalog=AccidentesBD;Integrated Security=True";
+            string constr = @"Data Source=DESKTOP-DAVIDCR\SQLEXPRESS;Initial Catalog=AccidentesBD;Integrated Security=True";
             //string constr = @"STRING DE CONEXION PARA LAPTOP DE DAVID";
 
             using (SqlConnection con = new SqlConnection(constr))

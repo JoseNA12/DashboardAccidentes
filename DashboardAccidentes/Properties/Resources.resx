@@ -200,4 +200,34 @@ WHERE p.nombre_provincia = '{0}' AND ac.annio = {1}
 GROUP BY rol.rol;</value>
     <comment>Query para obtener datos de grafico de la consulta libre. Es necesario usar string.Format() para insertar la provincia y el anno en el WHERE.</comment>
   </data>
+  <data name="QUERY_DINAMICA_ESQUELETO" xml:space="preserve">
+    <value>SELECT {0}, l.latitud, l.longitud, COUNT(*) AS Accidentes
+FROM 
+(
+ACCIDENTE ac INNER JOIN 
+LOCALIZACION l ON ac.ID_Localizacion = l.ID_Localizacion INNER JOIN
+PROVINCIA p ON l.ID_Provincia = p.ID_Provincia INNER JOIN
+CANTON c ON l.ID_Canton = c.ID_Canton INNER JOIN 
+DISTRITO d ON l.ID_Distrito = d.ID_Distrito
+) 
+INNER JOIN
+(
+AFECTADO af INNER JOIN GENERO g ON af.ID_Sexo = g.ID_Sexo INNER JOIN
+LESION le ON af.ID_Lesion = le.ID_Lesion INNER JOIN
+ROLAFECTADO rol ON af.ID_Rol = rol.ID_Rol
+) 
+ON ac.ID_Afectado = af.ID_Afectado
+
+WHERE
+--Condiciones de rango de annios
+(ac.annio &gt;= {1} AND ac.annio &lt;= {2})
+AND
+--Condiciones de localizaciones
+({3})
+AND
+--Condiciones de indicadores
+({4})
+
+GROUP BY {0}, l.latitud, l.longitud;</value>
+  </data>
 </root>

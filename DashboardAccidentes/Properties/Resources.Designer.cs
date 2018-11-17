@@ -141,6 +141,30 @@ namespace DashboardAccidentes.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT {0}, l.latitud, l.longitud, COUNT(*) AS Accidentes
+        ///FROM 
+        ///(
+        ///ACCIDENTE ac INNER JOIN 
+        ///LOCALIZACION l ON ac.ID_Localizacion = l.ID_Localizacion INNER JOIN
+        ///PROVINCIA p ON l.ID_Provincia = p.ID_Provincia INNER JOIN
+        ///CANTON c ON l.ID_Canton = c.ID_Canton INNER JOIN 
+        ///DISTRITO d ON l.ID_Distrito = d.ID_Distrito
+        ///) 
+        ///INNER JOIN
+        ///(
+        ///AFECTADO af INNER JOIN GENERO g ON af.ID_Sexo = g.ID_Sexo INNER JOIN
+        ///LESION le ON af.ID_Lesion = le.ID_Lesion INNER JOIN
+        ///ROLAFECTADO rol ON af.ID_Rol = rol.ID_Rol
+        ///) 
+        ///ON a [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string QUERY_DINAMICA_ESQUELETO {
+            get {
+                return ResourceManager.GetString("QUERY_DINAMICA_ESQUELETO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT af.edad_quinquenal, ac.annio, COUNT(*) AS accidentes
         ///FROM	ACCIDENTE ac INNER JOIN
         ///		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado

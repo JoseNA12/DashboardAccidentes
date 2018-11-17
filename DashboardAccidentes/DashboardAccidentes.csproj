@@ -59,10 +59,19 @@
     <Compile Include="Negocio\DAO_SQL.cs" />
     <Compile Include="Negocio\DatosGrafico.cs" />
     <Compile Include="Negocio\DTO.cs" />
+    <Compile Include="Negocio\EdadQuincenal.cs" />
     <Compile Include="Negocio\GeneradorGraficos.cs" />
+    <Compile Include="Negocio\Genero.cs" />
     <Compile Include="Negocio\GraficoBarras.cs" />
     <Compile Include="Negocio\IGraficoSubscriptor.cs" />
+    <Compile Include="Negocio\Indicador.cs" />
+    <Compile Include="Negocio\Localizaciones.cs" />
+    <Compile Include="Negocio\Query.cs" />
+    <Compile Include="Negocio\QueryDecorador.cs" />
+    <Compile Include="Negocio\QueryDinamica.cs" />
+    <Compile Include="Negocio\TipoAfectado.cs" />
     <Compile Include="Negocio\TipoIdentificador.cs" />
+    <Compile Include="Negocio\TipoLesion.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
