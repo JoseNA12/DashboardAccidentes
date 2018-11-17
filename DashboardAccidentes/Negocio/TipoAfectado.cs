@@ -13,7 +13,7 @@ namespace DashboardAccidentes.Negocio
 
         }
 
-        public string construirConsulta()
+        public override string construirConsulta()
         {
             string valor_indicador = obtenerValorIndicador("Rol afectado");
 

@@ -28,7 +28,7 @@ namespace DashboardAccidentes.Negocio
             return null;
         }
 
-        public string construirConsulta()
+        public override string construirConsulta()
         {
             return query.construirConsulta();
         }

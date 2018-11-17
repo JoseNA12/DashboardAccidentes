@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DashboardAccidentes.Negocio
 {
-    public interface Query
+    public abstract class Query
     {
-        string construirConsulta();
+        public abstract string construirConsulta();
     }
 }

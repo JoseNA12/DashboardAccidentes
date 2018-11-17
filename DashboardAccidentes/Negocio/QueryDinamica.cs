@@ -29,7 +29,7 @@ namespace DashboardAccidentes.Negocio
             this.indicadores = indicadores;
         }
 
-        public string construirConsulta()
+        public override string construirConsulta()
         {
             string esqueleto_query = Properties.Resources.ResourceManager.GetString("QUERY_DINAMICA_ESQUELETO");
 

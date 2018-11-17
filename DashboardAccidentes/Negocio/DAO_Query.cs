@@ -10,13 +10,17 @@ namespace DashboardAccidentes.Negocio
 {
     public class DAO_Query : DAO_SQL
     {
-        //Lista de tareas pendientes en esta clase:
-        //  * TODO: Agregar un parametro de tipo QueryDinamica a correrQueryDinamico
-        //  * TODO: Programar correrQueryDinamico
-
-        public DataTable correrQueryDinamico()
+        public DataTable correrQueryDinamico(QueryDinamica queryDinamica)
         {
-            return null;
+            TipoLesion tipoLesionDecorador = new TipoLesion(queryDinamica, queryDinamica.indicadores);
+            Genero generoDecorador = new Genero(tipoLesionDecorador, tipoLesionDecorador.indicadores);
+            EdadQuincenal edadQuincenal = new EdadQuincenal(generoDecorador, generoDecorador.indicadores);
+            TipoAfectado tipoAfectado = new TipoAfectado(edadQuincenal, edadQuincenal.indicadores);
+
+            string query = tipoAfectado.construirConsulta();
+            query = query.Replace(" AND {4}", "");
+
+            return RealizarConsulta(query);
         }
 
         public DataTable correrQueryIndicador(string indicador)
