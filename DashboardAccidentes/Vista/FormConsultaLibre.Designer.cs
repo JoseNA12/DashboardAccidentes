@@ -118,7 +118,7 @@
             this.grafico_consulta_libre.Legends.Add(legend1);
             this.grafico_consulta_libre.Location = new System.Drawing.Point(38, 74);
             this.grafico_consulta_libre.Name = "grafico_consulta_libre";
-            this.grafico_consulta_libre.Size = new System.Drawing.Size(1085, 524);
+            this.grafico_consulta_libre.Size = new System.Drawing.Size(1100, 524);
             this.grafico_consulta_libre.TabIndex = 31;
             this.grafico_consulta_libre.Text = "chart1";
             title1.DockedToChartArea = "ChartArea1";

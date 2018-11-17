@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -61,6 +61,7 @@
             this.columna_valor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_consultar = new System.Windows.Forms.Button();
             this.pb_imagenMapa = new System.Windows.Forms.PictureBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             this.pnlMenuGroup_distritos.SuspendLayout();
             this.pnlMenuGroup_cantones.SuspendLayout();
@@ -85,7 +86,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(719, 37);
+            this.label2.Location = new System.Drawing.Point(834, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 21);
             this.label2.TabIndex = 3;
@@ -97,7 +98,7 @@
             this.pnlMenu.Controls.Add(this.pnlMenuGroup_distritos);
             this.pnlMenu.Controls.Add(this.pnlMenuGroup_cantones);
             this.pnlMenu.Controls.Add(this.pnlMenuGroup_provincias);
-            this.pnlMenu.Location = new System.Drawing.Point(723, 61);
+            this.pnlMenu.Location = new System.Drawing.Point(835, 61);
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(312, 411);
             this.pnlMenu.TabIndex = 9;
@@ -267,7 +268,7 @@
             this.panel_anios.Controls.Add(this.label3);
             this.panel_anios.Controls.Add(this.comboBox_fechaInicial);
             this.panel_anios.Controls.Add(this.label4);
-            this.panel_anios.Location = new System.Drawing.Point(723, 170);
+            this.panel_anios.Location = new System.Drawing.Point(835, 173);
             this.panel_anios.Name = "panel_anios";
             this.panel_anios.Size = new System.Drawing.Size(312, 59);
             this.panel_anios.TabIndex = 15;
@@ -302,7 +303,7 @@
             this.panel_indicadores.Controls.Add(this.label8);
             this.panel_indicadores.Controls.Add(this.label7);
             this.panel_indicadores.Controls.Add(this.label6);
-            this.panel_indicadores.Location = new System.Drawing.Point(723, 253);
+            this.panel_indicadores.Location = new System.Drawing.Point(835, 256);
             this.panel_indicadores.Name = "panel_indicadores";
             this.panel_indicadores.Size = new System.Drawing.Size(312, 78);
             this.panel_indicadores.TabIndex = 17;
@@ -366,10 +367,11 @@
             // panel_mi_busqueda
             // 
             this.panel_mi_busqueda.Controls.Add(this.btn_eliminarIndicador);
+            this.panel_mi_busqueda.Controls.Add(this.label12);
             this.panel_mi_busqueda.Controls.Add(this.listView_misIndicadores);
-            this.panel_mi_busqueda.Location = new System.Drawing.Point(723, 356);
+            this.panel_mi_busqueda.Location = new System.Drawing.Point(835, 359);
             this.panel_mi_busqueda.Name = "panel_mi_busqueda";
-            this.panel_mi_busqueda.Size = new System.Drawing.Size(312, 174);
+            this.panel_mi_busqueda.Size = new System.Drawing.Size(312, 222);
             this.panel_mi_busqueda.TabIndex = 18;
             // 
             // btn_eliminarIndicador
@@ -379,11 +381,12 @@
             this.btn_eliminarIndicador.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_eliminarIndicador.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_eliminarIndicador.ForeColor = System.Drawing.Color.White;
-            this.btn_eliminarIndicador.Location = new System.Drawing.Point(222, 3);
+            this.btn_eliminarIndicador.Location = new System.Drawing.Point(222, 0);
             this.btn_eliminarIndicador.Name = "btn_eliminarIndicador";
             this.btn_eliminarIndicador.Size = new System.Drawing.Size(90, 25);
             this.btn_eliminarIndicador.TabIndex = 20;
             this.btn_eliminarIndicador.Text = "Eliminar";
+            this.btn_eliminarIndicador.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             this.btn_eliminarIndicador.UseVisualStyleBackColor = false;
             this.btn_eliminarIndicador.Click += new System.EventHandler(this.btn_eliminarIndicador_Click);
             // 
@@ -393,14 +396,14 @@
             this.columna_indicador,
             this.columna_valor});
             this.listView_misIndicadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            listViewGroup1.Header = "Mi Busqueda";
-            listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            listViewGroup1.Name = "miBusqueda";
+            listViewGroup3.Header = "Mi Busqueda";
+            listViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            listViewGroup3.Name = "miBusqueda";
             this.listView_misIndicadores.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
-            this.listView_misIndicadores.Location = new System.Drawing.Point(0, 3);
+            listViewGroup3});
+            this.listView_misIndicadores.Location = new System.Drawing.Point(0, 28);
             this.listView_misIndicadores.Name = "listView_misIndicadores";
-            this.listView_misIndicadores.Size = new System.Drawing.Size(312, 168);
+            this.listView_misIndicadores.Size = new System.Drawing.Size(312, 174);
             this.listView_misIndicadores.TabIndex = 19;
             this.listView_misIndicadores.UseCompatibleStateImageBehavior = false;
             this.listView_misIndicadores.View = System.Windows.Forms.View.Details;
@@ -422,7 +425,7 @@
             this.btn_consultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_consultar.ForeColor = System.Drawing.SystemColors.Control;
             this.btn_consultar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_consultar.Location = new System.Drawing.Point(723, 546);
+            this.btn_consultar.Location = new System.Drawing.Point(835, 601);
             this.btn_consultar.Name = "btn_consultar";
             this.btn_consultar.Size = new System.Drawing.Size(312, 35);
             this.btn_consultar.TabIndex = 19;
@@ -434,24 +437,36 @@
             // 
             this.pb_imagenMapa.Location = new System.Drawing.Point(31, 61);
             this.pb_imagenMapa.Name = "pb_imagenMapa";
-            this.pb_imagenMapa.Size = new System.Drawing.Size(676, 520);
+            this.pb_imagenMapa.Size = new System.Drawing.Size(790, 575);
             this.pb_imagenMapa.TabIndex = 20;
             this.pb_imagenMapa.TabStop = false;
+            // 
+            // label12
+            // 
+            this.label12.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(0, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(312, 25);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Mi busqueda";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // FormConsultaDinamica
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1084, 624);
+            this.ClientSize = new System.Drawing.Size(1184, 681);
             this.Controls.Add(this.pb_imagenMapa);
             this.Controls.Add(this.btn_consultar);
             this.Controls.Add(this.panel_mi_busqueda);
             this.Controls.Add(this.panel_indicadores);
             this.Controls.Add(this.panel_anios);
-            this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.pnlMenu);
             this.Name = "FormConsultaDinamica";
             this.Text = "Consulta dinámica de indicadores";
             this.Load += new System.EventHandler(this.FormConsultaDinamica_Load);
@@ -504,5 +519,6 @@
         private System.Windows.Forms.CheckedListBox checkedListBox_cantones;
         private System.Windows.Forms.Button btn_eliminarIndicador;
         private System.Windows.Forms.PictureBox pb_imagenMapa;
+        private System.Windows.Forms.Label label12;
     }
 }

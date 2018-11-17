@@ -11,6 +11,9 @@ namespace DashboardAccidentes.Negocio
     {
         private DAO_Carga miDao;
         private DatosGrafico datosGrafico;
+        private readonly string keyMap = "5vUpKQGPuRhI9lkAbxKaMA2RU7wDGvnj";
+
+        public string getKeyMap() { return keyMap; }
 
         // Datos visuales unicamente
         public DTO CargarDatos()
@@ -70,18 +73,6 @@ namespace DashboardAccidentes.Negocio
             return miCarrito;
         }
 
-        public void RealizarConsultaDinamica(DTO miDTO)
-        {
-            List<string> provincias = miDTO.getProvincias();
-            List<string> cantones = miDTO.getCantones();
-            List<string> distritos = miDTO.getDistritos();
-            string anioInicio = miDTO.getAnios()[0];
-            string aniFinal = miDTO.getAnios()[1];
-            Dictionary<string, string> indicadores = miDTO.getMisIndicadores();
-
-            // Decorador
-        }
-
         // Al no tener almacenados los nombres de los indicadores, el controlador los maneja y "setea" para la vista mediante un enum
         private List<string> getIndicadores()
         {
@@ -93,6 +84,18 @@ namespace DashboardAccidentes.Negocio
             indicadores.Add(Enum.GetName(typeof(TipoIdentificador), TipoIdentificador.Edad_quincenal));
 
             return indicadores;
+        }
+
+        public void RealizarConsultaDinamica(DTO miDTO)
+        {
+            List<string> provincias = miDTO.getProvincias();
+            List<string> cantones = miDTO.getCantones();
+            List<string> distritos = miDTO.getDistritos();
+            string anioInicio = miDTO.getAnios()[0];
+            string aniFinal = miDTO.getAnios()[1];
+            Dictionary<string, string> indicadores = miDTO.getMisIndicadores();
+
+            // Decorador
         }
 
         public void generarGrafico(string indicador, Chart grafico)
