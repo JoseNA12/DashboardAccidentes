@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace DashboardAccidentes.Negocio
 {
     class Controlador
     {
         private DAO_Carga miDao;
+        private DatosGrafico datosGrafico;
 
         // Datos visuales unicamente
         public DTO CargarDatos()
@@ -91,6 +93,25 @@ namespace DashboardAccidentes.Negocio
             indicadores.Add(Enum.GetName(typeof(TipoIdentificador), TipoIdentificador.Edad_quincenal));
 
             return indicadores;
+        }
+
+        public void generarGrafico(string indicador, Chart grafico)
+        {
+            GeneradorGraficos generador = new GeneradorGraficos();
+            generador.procesarDatos(indicador, grafico);
+        }
+
+        public void actualizarDatosGrafico(string provincia, int annio)
+        {
+            datosGrafico.actualizarDatos(provincia, annio);
+        }
+
+        public void registrarGraficoObservador(Chart grafico)
+        {
+            if (datosGrafico == null)
+                datosGrafico = new DatosGrafico();
+
+            datosGrafico.subscribir(new GraficoBarras(grafico));
         }
     }
 }

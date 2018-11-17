@@ -154,4 +154,50 @@
   <data name="eliminar_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\eliminar_64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="QUERY_EDAD_QUINCENAL" xml:space="preserve">
+    <value>SELECT af.edad_quinquenal, ac.annio, COUNT(*) AS accidentes
+FROM	ACCIDENTE ac INNER JOIN
+		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado
+GROUP BY af.edad_quinquenal, ac.annio
+ORDER BY af.edad_quinquenal, ac.annio;</value>
+    <comment>Query para obtener datos de grafico de indicador de edad quinquenal.</comment>
+  </data>
+  <data name="QUERY_GENERO" xml:space="preserve">
+    <value>SELECT g.sexo, ac.annio, COUNT(*) AS accidentes
+FROM	ACCIDENTE ac INNER JOIN
+		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado INNER JOIN
+		GENERO g ON af.ID_Sexo = g.ID_Sexo
+GROUP BY g.sexo, ac.annio
+ORDER BY g.sexo, ac.annio;</value>
+    <comment>Query para obtener datos de grafico de indicador de genero.</comment>
+  </data>
+  <data name="QUERY_ROL_AFECTADO" xml:space="preserve">
+    <value>SELECT rol.rol, ac.annio, COUNT(*) AS accidentes
+FROM	ACCIDENTE ac INNER JOIN 
+		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado INNER JOIN
+		ROLAFECTADO rol ON af.ID_Rol = rol.ID_Rol
+GROUP BY rol.rol, ac.annio
+ORDER BY rol.rol, ac.annio;</value>
+    <comment>Query para obtener datos de grafico de indicador de rol de afectado.</comment>
+  </data>
+  <data name="QUERY_TIPO_LESION" xml:space="preserve">
+    <value>SELECT l.tipo_lesion, ac.annio, COUNT(*) AS accidentes
+FROM	ACCIDENTE ac INNER JOIN
+		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado INNER JOIN
+		LESION l ON af.ID_Lesion = l.ID_Lesion
+GROUP BY l.tipo_lesion, ac.annio
+ORDER BY l.tipo_lesion, ac.annio;</value>
+    <comment>Query para obtener datos de grafico de indicador de tipo de lesion.</comment>
+  </data>
+  <data name="QUERY_LIBRE" xml:space="preserve">
+    <value>SELECT rol.rol, COUNT(*) AS Accidentes
+FROM (ACCIDENTE ac INNER JOIN 
+		(AFECTADO af INNER JOIN ROLAFECTADO rol ON af.ID_Rol = rol.ID_Rol) 
+	 ON ac.ID_Afectado = af.ID_Afectado) INNER JOIN
+		(LOCALIZACION l INNER JOIN PROVINCIA p ON l.ID_Provincia = p.ID_Provincia)
+	 ON ac.ID_Localizacion = l.ID_Localizacion
+WHERE p.nombre_provincia = '{0}' AND ac.annio = {1}
+GROUP BY rol.rol;</value>
+    <comment>Query para obtener datos de grafico de la consulta libre. Es necesario usar string.Format() para insertar la provincia y el anno en el WHERE.</comment>
+  </data>
 </root>

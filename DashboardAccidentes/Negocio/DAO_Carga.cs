@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DashboardAccidentes.Negocio
 {
-    class DAO_Carga : DAO_SQL
+    public class DAO_Carga : DAO_SQL
     {
         // Obtener todas las provincias
         public List<string> getProvincias()

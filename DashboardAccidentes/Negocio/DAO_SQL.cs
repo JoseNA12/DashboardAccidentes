@@ -11,11 +11,14 @@ using System.Threading.Tasks;
 
 namespace DashboardAccidentes.Negocio
 {
-    class DAO_SQL
+    public class DAO_SQL
     {
         public DataTable RealizarConsulta(string query)
         {
-            string constr = @"Data Source=JOSENA-PC;Initial Catalog=AccidentesBD;Integrated Security=True";
+            string constr = @"";
+            //string constr = @"Data Source=JOSENA-PC;Initial Catalog=AccidentesBD;Integrated Security=True";
+            //string constr = @"Data Source=DESKTOP-DAVIDCR\SQLEXPRESS;Initial Catalog=AccidentesBD;Integrated Security=True";
+            //string constr = @"STRING DE CONEXION PARA LAPTOP DE DAVID";
 
             using (SqlConnection con = new SqlConnection(constr))
             {
