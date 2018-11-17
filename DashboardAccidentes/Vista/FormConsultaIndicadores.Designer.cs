@@ -46,18 +46,19 @@
             this.btn_consultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_consultar.ForeColor = System.Drawing.SystemColors.Control;
             this.btn_consultar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_consultar.Location = new System.Drawing.Point(648, 533);
+            this.btn_consultar.Location = new System.Drawing.Point(869, 593);
             this.btn_consultar.Name = "btn_consultar";
             this.btn_consultar.Size = new System.Drawing.Size(261, 35);
             this.btn_consultar.TabIndex = 20;
             this.btn_consultar.Text = "Consultar";
             this.btn_consultar.UseVisualStyleBackColor = false;
+            this.btn_consultar.Click += new System.EventHandler(this.btn_consultar_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(377, 543);
+            this.label1.Location = new System.Drawing.Point(925, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 17);
             this.label1.TabIndex = 21;
@@ -68,7 +69,7 @@
             this.comboBox_indicador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_indicador.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_indicador.FormattingEnabled = true;
-            this.comboBox_indicador.Location = new System.Drawing.Point(453, 540);
+            this.comboBox_indicador.Location = new System.Drawing.Point(1001, 43);
             this.comboBox_indicador.Name = "comboBox_indicador";
             this.comboBox_indicador.Size = new System.Drawing.Size(129, 24);
             this.comboBox_indicador.TabIndex = 22;
@@ -85,7 +86,7 @@
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.grafico_consulta_indicadores.Series.Add(series1);
-            this.grafico_consulta_indicadores.Size = new System.Drawing.Size(876, 438);
+            this.grafico_consulta_indicadores.Size = new System.Drawing.Size(1124, 500);
             this.grafico_consulta_indicadores.TabIndex = 23;
             this.grafico_consulta_indicadores.Text = "chart1";
             // 
@@ -93,7 +94,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(29, 36);
+            this.label2.Location = new System.Drawing.Point(50, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(213, 23);
             this.label2.TabIndex = 24;
@@ -104,7 +105,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(949, 616);
+            this.ClientSize = new System.Drawing.Size(1184, 681);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.grafico_consulta_indicadores);
             this.Controls.Add(this.comboBox_indicador);
