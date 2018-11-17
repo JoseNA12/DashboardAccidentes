@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
@@ -54,8 +55,13 @@
     </Compile>
     <Compile Include="Negocio\Controlador.cs" />
     <Compile Include="Negocio\DAO_Carga.cs" />
+    <Compile Include="Negocio\DAO_Query.cs" />
     <Compile Include="Negocio\DAO_SQL.cs" />
+    <Compile Include="Negocio\DatosGrafico.cs" />
     <Compile Include="Negocio\DTO.cs" />
+    <Compile Include="Negocio\GeneradorGraficos.cs" />
+    <Compile Include="Negocio\GraficoBarras.cs" />
+    <Compile Include="Negocio\IGraficoSubscriptor.cs" />
     <Compile Include="Negocio\TipoIdentificador.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
