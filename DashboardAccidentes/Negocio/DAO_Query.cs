@@ -13,8 +13,6 @@ namespace DashboardAccidentes.Negocio
         //Lista de tareas pendientes en esta clase:
         //  * TODO: Agregar un parametro de tipo QueryDinamica a correrQueryDinamico
         //  * TODO: Programar correrQueryDinamico
-        //  * TODO: Programar correrQueryLibre
-        //  * TODO: Hacer que DAO_Query sea cliente de DatosGrafico segun el patron observer (Ver UML).
 
         public DataTable correrQueryDinamico()
         {
@@ -27,9 +25,12 @@ namespace DashboardAccidentes.Negocio
             return RealizarConsulta(query);
         }
 
-        public DataTable correrQueryLibre()
+        public DataTable correrQueryLibre(string provincia, int annio)
         {
-            return null;
+            string query = Properties.Resources.ResourceManager.GetString("QUERY_LIBRE");
+            query = string.Format(query, provincia, annio);
+
+            return  RealizarConsulta(query);
         }
     }
 }

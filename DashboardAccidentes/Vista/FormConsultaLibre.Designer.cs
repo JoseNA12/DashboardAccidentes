@@ -30,7 +30,7 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.label2 = new System.Windows.Forms.Label();
             this.btn_consultar = new System.Windows.Forms.Button();
             this.comboBox_provincias = new System.Windows.Forms.ComboBox();
@@ -64,6 +64,7 @@
             this.btn_consultar.TabIndex = 25;
             this.btn_consultar.Text = "Consultar";
             this.btn_consultar.UseVisualStyleBackColor = false;
+            this.btn_consultar.Click += new System.EventHandler(this.btn_consultar_Click);
             // 
             // comboBox_provincias
             // 
@@ -107,19 +108,24 @@
             // 
             // grafico_consulta_libre
             // 
+            chartArea1.AxisX.LabelAutoFitStyle = ((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles)((((System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.IncreaseFont | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.StaggeredLabels) 
+            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.LabelsAngleStep30) 
+            | System.Windows.Forms.DataVisualization.Charting.LabelAutoFitStyles.WordWrap)));
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             chartArea1.Name = "ChartArea1";
             this.grafico_consulta_libre.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.grafico_consulta_libre.Legends.Add(legend1);
             this.grafico_consulta_libre.Location = new System.Drawing.Point(38, 74);
             this.grafico_consulta_libre.Name = "grafico_consulta_libre";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.grafico_consulta_libre.Series.Add(series1);
             this.grafico_consulta_libre.Size = new System.Drawing.Size(885, 446);
             this.grafico_consulta_libre.TabIndex = 31;
             this.grafico_consulta_libre.Text = "chart1";
+            title1.DockedToChartArea = "ChartArea1";
+            title1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.IsDockedInsideChartArea = false;
+            title1.Name = "Title1";
+            this.grafico_consulta_libre.Titles.Add(title1);
             // 
             // FormConsultaLibre
             // 

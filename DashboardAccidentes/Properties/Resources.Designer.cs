@@ -168,6 +168,22 @@ namespace DashboardAccidentes.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SELECT rol.rol, COUNT(*) AS Accidentes
+        ///FROM (ACCIDENTE ac INNER JOIN 
+        ///		(AFECTADO af INNER JOIN ROLAFECTADO rol ON af.ID_Rol = rol.ID_Rol) 
+        ///	 ON ac.ID_Afectado = af.ID_Afectado) INNER JOIN
+        ///		(LOCALIZACION l INNER JOIN PROVINCIA p ON l.ID_Provincia = p.ID_Provincia)
+        ///	 ON ac.ID_Localizacion = l.ID_Localizacion
+        ///WHERE p.nombre_provincia = &apos;{0}&apos; AND ac.annio = {1}
+        ///GROUP BY rol.rol;.
+        /// </summary>
+        internal static string QUERY_LIBRE {
+            get {
+                return ResourceManager.GetString("QUERY_LIBRE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SELECT rol.rol, ac.annio, COUNT(*) AS accidentes
         ///FROM	ACCIDENTE ac INNER JOIN 
         ///		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado INNER JOIN

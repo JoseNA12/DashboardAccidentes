@@ -189,4 +189,15 @@ GROUP BY l.tipo_lesion, ac.annio
 ORDER BY l.tipo_lesion, ac.annio;</value>
     <comment>Query para obtener datos de grafico de indicador de tipo de lesion.</comment>
   </data>
+  <data name="QUERY_LIBRE" xml:space="preserve">
+    <value>SELECT rol.rol, COUNT(*) AS Accidentes
+FROM (ACCIDENTE ac INNER JOIN 
+		(AFECTADO af INNER JOIN ROLAFECTADO rol ON af.ID_Rol = rol.ID_Rol) 
+	 ON ac.ID_Afectado = af.ID_Afectado) INNER JOIN
+		(LOCALIZACION l INNER JOIN PROVINCIA p ON l.ID_Provincia = p.ID_Provincia)
+	 ON ac.ID_Localizacion = l.ID_Localizacion
+WHERE p.nombre_provincia = '{0}' AND ac.annio = {1}
+GROUP BY rol.rol;</value>
+    <comment>Query para obtener datos de grafico de la consulta libre. Es necesario usar string.Format() para insertar la provincia y el anno en el WHERE.</comment>
+  </data>
 </root>

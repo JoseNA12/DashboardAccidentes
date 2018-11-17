@@ -57,8 +57,11 @@
     <Compile Include="Negocio\DAO_Carga.cs" />
     <Compile Include="Negocio\DAO_Query.cs" />
     <Compile Include="Negocio\DAO_SQL.cs" />
+    <Compile Include="Negocio\DatosGrafico.cs" />
     <Compile Include="Negocio\DTO.cs" />
     <Compile Include="Negocio\GeneradorGraficos.cs" />
+    <Compile Include="Negocio\GraficoBarras.cs" />
+    <Compile Include="Negocio\IGraficoSubscriptor.cs" />
     <Compile Include="Negocio\TipoIdentificador.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

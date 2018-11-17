@@ -10,6 +10,7 @@ namespace DashboardAccidentes.Negocio
     class Controlador
     {
         private DAO_Carga miDao;
+        private DatosGrafico datosGrafico;
 
         // Datos visuales unicamente
         public DTO CargarDatos()
@@ -98,6 +99,19 @@ namespace DashboardAccidentes.Negocio
         {
             GeneradorGraficos generador = new GeneradorGraficos();
             generador.procesarDatos(indicador, grafico);
+        }
+
+        public void actualizarDatosGrafico(string provincia, int annio)
+        {
+            datosGrafico.actualizarDatos(provincia, annio);
+        }
+
+        public void registrarGraficoObservador(Chart grafico)
+        {
+            if (datosGrafico == null)
+                datosGrafico = new DatosGrafico();
+
+            datosGrafico.subscribir(new GraficoBarras(grafico));
         }
     }
 }
