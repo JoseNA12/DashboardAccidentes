@@ -63,6 +63,7 @@
     <Compile Include="Negocio\GeneradorGraficos.cs" />
     <Compile Include="Negocio\Genero.cs" />
     <Compile Include="Negocio\GraficoBarras.cs" />
+    <Compile Include="Negocio\Handler_Mapas.cs" />
     <Compile Include="Negocio\IGraficoSubscriptor.cs" />
     <Compile Include="Negocio\Indicador.cs" />
     <Compile Include="Negocio\Localizaciones.cs" />
