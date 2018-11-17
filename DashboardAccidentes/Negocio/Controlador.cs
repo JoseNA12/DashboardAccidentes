@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace DashboardAccidentes.Negocio
 {
@@ -91,6 +92,12 @@ namespace DashboardAccidentes.Negocio
             indicadores.Add(Enum.GetName(typeof(TipoIdentificador), TipoIdentificador.Edad_quincenal));
 
             return indicadores;
+        }
+
+        public void generarGrafico(string indicador, Chart grafico)
+        {
+            GeneradorGraficos generador = new GeneradorGraficos();
+            generador.procesarDatos(indicador, grafico);
         }
     }
 }

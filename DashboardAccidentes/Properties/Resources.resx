@@ -159,7 +159,7 @@
 FROM	ACCIDENTE ac INNER JOIN
 		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado
 GROUP BY af.edad_quinquenal, ac.annio
-ORDER BY af.edad_quinquenal;</value>
+ORDER BY af.edad_quinquenal, ac.annio;</value>
     <comment>Query para obtener datos de grafico de indicador de edad quinquenal.</comment>
   </data>
   <data name="QUERY_GENERO" xml:space="preserve">
@@ -168,7 +168,7 @@ FROM	ACCIDENTE ac INNER JOIN
 		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado INNER JOIN
 		GENERO g ON af.ID_Sexo = g.ID_Sexo
 GROUP BY g.sexo, ac.annio
-ORDER BY g.sexo;</value>
+ORDER BY g.sexo, ac.annio;</value>
     <comment>Query para obtener datos de grafico de indicador de genero.</comment>
   </data>
   <data name="QUERY_ROL_AFECTADO" xml:space="preserve">
@@ -177,7 +177,7 @@ FROM	ACCIDENTE ac INNER JOIN
 		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado INNER JOIN
 		ROLAFECTADO rol ON af.ID_Rol = rol.ID_Rol
 GROUP BY rol.rol, ac.annio
-ORDER BY rol.rol;</value>
+ORDER BY rol.rol, ac.annio;</value>
     <comment>Query para obtener datos de grafico de indicador de rol de afectado.</comment>
   </data>
   <data name="QUERY_TIPO_LESION" xml:space="preserve">
@@ -186,7 +186,7 @@ FROM	ACCIDENTE ac INNER JOIN
 		AFECTADO af ON ac.ID_Afectado = af.ID_Afectado INNER JOIN
 		LESION l ON af.ID_Lesion = l.ID_Lesion
 GROUP BY l.tipo_lesion, ac.annio
-ORDER BY l.tipo_lesion;</value>
+ORDER BY l.tipo_lesion, ac.annio;</value>
     <comment>Query para obtener datos de grafico de indicador de tipo de lesion.</comment>
   </data>
 </root>

@@ -30,7 +30,6 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.btn_consultar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox_indicador = new System.Windows.Forms.ComboBox();
@@ -52,6 +51,7 @@
             this.btn_consultar.TabIndex = 20;
             this.btn_consultar.Text = "Consultar";
             this.btn_consultar.UseVisualStyleBackColor = false;
+            this.btn_consultar.Click += new System.EventHandler(this.btn_consultar_Click);
             // 
             // label1
             // 
@@ -81,11 +81,6 @@
             this.grafico_consulta_indicadores.Legends.Add(legend1);
             this.grafico_consulta_indicadores.Location = new System.Drawing.Point(33, 77);
             this.grafico_consulta_indicadores.Name = "grafico_consulta_indicadores";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.grafico_consulta_indicadores.Series.Add(series1);
             this.grafico_consulta_indicadores.Size = new System.Drawing.Size(876, 438);
             this.grafico_consulta_indicadores.TabIndex = 23;
             this.grafico_consulta_indicadores.Text = "chart1";
