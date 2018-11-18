@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -353,7 +354,6 @@ namespace DashboardAccidentes.Vista
 
         private void btn_consultar_Click(object sender, EventArgs e)
         {
-            // HACER LA VALIDACIONES NECESARIAS
             List<string> anios = getAniosMarcados();
 
             if (anios != null)
@@ -363,12 +363,22 @@ namespace DashboardAccidentes.Vista
                 List<string> misDistritos = getDistritosMarcados();
                 Dictionary<string, string> misIndicadores = getIndicadoresMarcados();
 
-
                 // RESULTADO PARA ENVIAR
-                DTO miCarrito = new DTO(misProvincias, misCantones, misCantones, anios, misIndicadores);
-                miControlador.RealizarConsultaDinamica(miCarrito);
+                DTO miCarrito = new DTO(misProvincias, misCantones, misDistritos, anios, misIndicadores);
+                DTO miResultado = miControlador.RealizarConsultaDinamica(miCarrito);
 
-                //ObtenerImagenMapa();
+                progressBar_consulta.Visible = true;
+
+                if (miResultado.getResultadoDinamica().Count() > 0)
+                {
+                    DesplegarImagenMapa(miResultado);
+                }
+                else
+                {
+                    MessageBox.Show("No se han encontrado accidentes con los parametros indicados!.", "Atención!");
+                }
+
+                progressBar_consulta.Visible = false;
             }
             else
             {
@@ -376,28 +386,12 @@ namespace DashboardAccidentes.Vista
             }
         }
 
-        private void ObtenerImagenMapa()
+        private void DesplegarImagenMapa(DTO miResultado)
         {
-            /* Guias
-            // https://developers.google.com/maps/documentation/maps-static/dev-guide
-            // https://csharp.hotexamples.com/examples/System.Windows.Forms/PictureBox/Load/php-picturebox-load-method-examples.html
-            // https://developers.google.com/maps/documentation/maps-static/intro?csw=1
-            // --------------
-            string googleKey = "AIzaSyARQO1lorK1UyiWJk438q1U7jCzZkXIj7c"; // NO modificar
-            string signature = "signature=p0Jo36aoj_ML4N0X1FjdH4P_6PE=";
-
-            string dir = "https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=400x400&markers=color:blue|label:S|62.107733,-145.541936&markers=size:tiny|color:green|Delta+Junction,AK&markers=size:mid|color:0xFFFF00|label:C|Tok,AK&key=" + googleKey;
-            string dir_2 = "https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=13&size=600x300&maptype=roadmap " +
-                   " & markers = color:blue % 7Clabel: S % 7C40.702147,-74.015794 & markers = color:green % 7Clabel: G % 7C40.711614,-74.012318" +
-                   "& markers = color:red % 7Clabel: C % 7C40.718217,-73.998284" +
-                   "& key = " + googleKey;
-            */
-
-            Uri uri_1 = new Uri("https://open.mapquestapi.com/staticmap/v5/map?key=" + miControlador.getKeyMap() + "&locations=New+York,NY|flag-putojaja||Buffalo,NY|flag-Holakh12||Rochester,NY|flag-drinkaa-md&size=790,575");
-
-            Uri uri_2 = new Uri("https://open.mapquestapi.com/staticmap/v5/map?key=" + miControlador.getKeyMap() + "&center=40.039401,-76.307078&size=686,520");
-
-            HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(uri_1);
+            string miURL = miControlador.ConstruirURL("790,575", miResultado.getResultadoDinamica());
+ 
+            Uri uri = new Uri(miURL);
+            HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(uri);
 
             HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
             Stream imageStream = httpResponse.GetResponseStream();

@@ -86,5 +86,10 @@ namespace DashboardAccidentes.Negocio
         {
             return indicadoresUsuario;
         }
+
+        public List<ResultadoConsultaDinamica> getResultadoDinamica()
+        {
+            return resultadoDinamica;
+        }
     }
 }

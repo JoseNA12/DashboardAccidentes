@@ -45,68 +45,68 @@ namespace DashboardAccidentes.Negocio
             return dt_procesado;
         }
 
-        public void formatearCoordenadas()
-        {
-            //Aqui va lo del iteraror
-        }
-
-        public void realizarConsulta(QueryDinamica q) //TODO no se si vamos a pasarle el query por un dto o por parametros separados
+        public List<ResultadoConsultaDinamica> realizarConsulta(QueryDinamica query) //TODO no se si vamos a pasarle el query por un dto o por parametros separados
         {
             DAO_Query dao = new DAO_Query();
-            DataTable datos = procesarResultadosQuery(dao.correrQueryDinamico(q));
+            DataTable datos = procesarResultadosQuery(dao.correrQueryDinamico(query));
 
-            List<string> info = new List<string>();
+            List<ResultadoConsultaDinamica> info = new List<ResultadoConsultaDinamica>();
 
-            foreach (DataRow row in datos.Rows)
+            foreach (DataRow row in datos.Rows) // nombre_[provincia|canton|distrito], latitud, longitud, Accidentes
             {
-                info.Add(row["Accidentes"].ToString());
+                ResultadoConsultaDinamica miResultado = new ResultadoConsultaDinamica();
+                //resultado.setProvincia(row["nombre_provincia"].ToString());
+                //resultado.setCanton(row["nombre_canton"].ToString());
+                //resultado.setDistrito(row["nombre_distrito"].ToString());
+                miResultado.setLatitud(convertirCoordenada(row["latitud"].ToString()));
+                miResultado.setLongitud(convertirCoordenada(row["longitud"].ToString()));
+                miResultado.setAccidentes(row["Accidentes"].ToString());
 
-                convertirCoordenadas(row["latitud"].ToString(), row["longitud"].ToString());
-
-                // nombre_[provincia|canton|distrito], latitud, longitud, Accidentes
+                info.Add(miResultado);
             }
+
+            return info;
         }
 
-        private List<string> convertirCoordenadas(string latitud, string longitud)
+        private string convertirCoordenada(string coordenada)
         {
             /*
                Las coordenadas vienen así: -81°53'24"
                El primer número son grados, el segundo minutos y el tercero segundos 
                La coordenada en decimales es así:
                c = grados + (minutos/60) + (segundos / 3600) 
-               Pero los grados tienen que estar positivos, si es negativo nada más es de multiplicar por -1 los grados, hacer el cálculo y multiplicar por -1 el resultado
+               Pero los grados tienen que estar positivos, si es negativo nada más es de multiplicar por -1 
+               los grados, hacer el cálculo y multiplicar por -1 el resultado
             */
 
             char[] delimitadores = { '°', '\'', '"' };
-            string[] numerosLatitud = latitud.Split(delimitadores);
-            string[] numerosLongitud = longitud.Split(delimitadores);
-
-            string utm_latitud = "";
-            string utm_longitud = "";
+            string[] numerosCoordenada = coordenada.Split(delimitadores);
+            string utm_coordenada = "";
+            bool gradosNegativo = false;
             double grados = 0;
             double minutos = 0;
             double segundos = 0;
 
-            // -- Latitud -- \\
-            grados = double.Parse(numerosLatitud[0]);
-            minutos = double.Parse(numerosLatitud[1]) / 60;
-            segundos = double.Parse(numerosLatitud[2]) / 3600;
+            grados = double.Parse(numerosCoordenada[0]);
+            minutos = double.Parse(numerosCoordenada[1]) / 60;
+            segundos = double.Parse(numerosCoordenada[2]) / 3600;
 
-            if (grados < 0) { grados *= -1; }
+            if (grados < 0)
+            {
+                grados *= -1;
+                gradosNegativo = true;
+            }
 
-            utm_latitud = (grados + minutos + segundos).ToString();
+            if (gradosNegativo)
+            {
+                utm_coordenada = (-1 * (grados + minutos + segundos)).ToString();
+            }
+            else
+            {
+                utm_coordenada = ((grados + minutos + segundos)).ToString();
+            }
 
-
-            // -- Logitud -- \\
-            grados = double.Parse(numerosLongitud[0]);
-            minutos = double.Parse(numerosLongitud[1]) / 60;
-            segundos = double.Parse(numerosLongitud[2]) / 3600;
-
-            if (grados < 0) { grados *= -1; }
-
-            utm_longitud = (-1 * (grados + minutos + segundos)).ToString();
-
-            return new List<string>() { utm_latitud.Replace(",", "."), utm_longitud.Replace(",", ".") };
+            return utm_coordenada.Replace(",", ".");
         }
     }
 }

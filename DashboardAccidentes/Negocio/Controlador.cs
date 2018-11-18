@@ -11,9 +11,8 @@ namespace DashboardAccidentes.Negocio
     {
         private DAO_Carga miDao;
         private DatosGrafico datosGrafico;
-        private readonly string keyMap = "5vUpKQGPuRhI9lkAbxKaMA2RU7wDGvnj";
+        public ConfigMapa configMapa = new ConfigMapa();
 
-        public string getKeyMap() { return keyMap; }
 
         // Datos visuales unicamente
         public DTO CargarDatos()
@@ -86,7 +85,7 @@ namespace DashboardAccidentes.Negocio
             return indicadores;
         }
 
-        public void RealizarConsultaDinamica(DTO miDTO)
+        public DTO RealizarConsultaDinamica(DTO miDTO)
         {
             List<string> provincias = miDTO.getProvincias();
             List<string> cantones = miDTO.getCantones();
@@ -111,8 +110,11 @@ namespace DashboardAccidentes.Negocio
                 indicadores
             );
 
-            new Handler_Mapas().realizarConsulta(queryDinamica);
+            Handler_Mapas miManejador = new Handler_Mapas();
 
+            DTO miCarrito = new DTO(miManejador.realizarConsulta(queryDinamica));
+
+            return miCarrito;
         }
 
         public void generarGrafico(string indicador, Chart grafico)
@@ -134,5 +136,23 @@ namespace DashboardAccidentes.Negocio
             datosGrafico.subscribir(new GraficoBarras(grafico));
         }
 
+        public string ConstruirURL(string tamanio, List<ResultadoConsultaDinamica> lista)
+        {
+            string url = configMapa.getURL_base() + configMapa.getKeyMap() + configMapa.getTagTamanio() + tamanio + configMapa.getTagUbicaciones();
+
+            for (int i = 0; i < lista.Count(); i++)
+            {
+                ResultadoConsultaDinamica result = lista[i];
+
+                url += result.getLatitud() + "," + result.getLongitud() + "|"
+                    + configMapa.getTagMarcador() + result.getAccidentes();
+
+                if (i != lista.Count() - 1)
+                {
+                    url += "||";
+                }
+            }
+            return url;
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace DashboardAccidentes.Vista
             comboBox_indicador.Items.AddRange(DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
         }
 
-        // Una vez recibidos los nonmbre de los enum's, tratar los strings para ser mostrador en pantalla
+        // Una vez recibidos los nombres de los enum's, tratar los strings para ser mostrador en pantalla
         private List<string> DarFormatoEnumIndicador(List<string> pIndicadores)
         {
             List<string> indicadores = new List<string>();
