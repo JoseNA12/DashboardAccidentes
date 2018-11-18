@@ -15,16 +15,16 @@ namespace UnitTestProject
             {
                 "San José"
             };
-            var cantones = new List<string>();/*
+            var cantones = new List<string>()
             {
                 "Curridabat"
-            };*/
-            var distritos = new List<string>();/*
+            };
+            var distritos = new List<string>()
             {
                 "Curridabat",
                 "Granadilla",
                 "Tirrases"
-            };*/
+            };
 
             List<Indicador> indicadores = new List<Indicador>()
             {
@@ -36,8 +36,10 @@ namespace UnitTestProject
             Localizaciones localizaciones = new Localizaciones(provincias, cantones, distritos);
             QueryDinamica queryDinamica = new QueryDinamica(provincias, cantones, distritos, 2012, 2014, indicadores);
 
-            DAO_Query dAO = new DAO_Query();
-            var dt = dAO.correrQueryDinamico(queryDinamica);
+            new Handler_Mapas().realizarConsulta(queryDinamica);
+
+            //DAO_Query dAO = new DAO_Query();
+            //var dt = dAO.correrQueryDinamico(queryDinamica);
             //TipoLesion tipoLesionDecorador = new TipoLesion(queryDinamica, queryDinamica.indicadores);
             //Genero generoDecorador = new Genero(tipoLesionDecorador, tipoLesionDecorador.indicadores);
             //EdadQuincenal edadQuincenal = new EdadQuincenal(generoDecorador, generoDecorador.indicadores);
