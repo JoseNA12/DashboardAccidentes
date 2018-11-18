@@ -92,10 +92,27 @@ namespace DashboardAccidentes.Negocio
             List<string> cantones = miDTO.getCantones();
             List<string> distritos = miDTO.getDistritos();
             string anioInicio = miDTO.getAnios()[0];
-            string aniFinal = miDTO.getAnios()[1];
-            Dictionary<string, string> indicadores = miDTO.getMisIndicadores();
+            string anioFinal = miDTO.getAnios()[1];
 
-            // Decorador
+            List<Indicador> indicadores = new List<Indicador>();
+
+            foreach (KeyValuePair<string, string> entry in miDTO.getIndicadoresUsuario())
+            {
+                indicadores.Add(new Indicador(entry.Key, entry.Value));
+            }
+
+            Localizaciones localizaciones = new Localizaciones(provincias, cantones, distritos);
+            QueryDinamica queryDinamica = new QueryDinamica(
+                provincias, 
+                cantones, 
+                distritos, 
+                int.Parse(anioInicio), 
+                int.Parse(anioFinal), 
+                indicadores
+            );
+
+            new Handler_Mapas().realizarConsulta(queryDinamica);
+
         }
 
         public void generarGrafico(string indicador, Chart grafico)
@@ -116,5 +133,6 @@ namespace DashboardAccidentes.Negocio
 
             datosGrafico.subscribir(new GraficoBarras(grafico));
         }
+
     }
 }

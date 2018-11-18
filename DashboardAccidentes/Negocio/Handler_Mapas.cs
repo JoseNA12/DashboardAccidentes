@@ -54,6 +54,59 @@ namespace DashboardAccidentes.Negocio
         {
             DAO_Query dao = new DAO_Query();
             DataTable datos = procesarResultadosQuery(dao.correrQueryDinamico(q));
+
+            List<string> info = new List<string>();
+
+            foreach (DataRow row in datos.Rows)
+            {
+                info.Add(row["Accidentes"].ToString());
+
+                convertirCoordenadas(row["latitud"].ToString(), row["longitud"].ToString());
+
+                // nombre_[provincia|canton|distrito], latitud, longitud, Accidentes
+            }
+        }
+
+        private List<string> convertirCoordenadas(string latitud, string longitud)
+        {
+            /*
+               Las coordenadas vienen así: -81°53'24"
+               El primer número son grados, el segundo minutos y el tercero segundos 
+               La coordenada en decimales es así:
+               c = grados + (minutos/60) + (segundos / 3600) 
+               Pero los grados tienen que estar positivos, si es negativo nada más es de multiplicar por -1 los grados, hacer el cálculo y multiplicar por -1 el resultado
+            */
+
+            char[] delimitadores = { '°', '\'', '"' };
+            string[] numerosLatitud = latitud.Split(delimitadores);
+            string[] numerosLongitud = longitud.Split(delimitadores);
+
+            string utm_latitud = "";
+            string utm_longitud = "";
+            double grados = 0;
+            double minutos = 0;
+            double segundos = 0;
+
+            // -- Latitud -- \\
+            grados = double.Parse(numerosLatitud[0]);
+            minutos = double.Parse(numerosLatitud[1]) / 60;
+            segundos = double.Parse(numerosLatitud[2]) / 3600;
+
+            if (grados < 0) { grados *= -1; }
+
+            utm_latitud = (grados + minutos + segundos).ToString();
+
+
+            // -- Logitud -- \\
+            grados = double.Parse(numerosLongitud[0]);
+            minutos = double.Parse(numerosLongitud[1]) / 60;
+            segundos = double.Parse(numerosLongitud[2]) / 3600;
+
+            if (grados < 0) { grados *= -1; }
+
+            utm_longitud = (-1 * (grados + minutos + segundos)).ToString();
+
+            return new List<string>() { utm_latitud.Replace(",", "."), utm_longitud.Replace(",", ".") };
         }
     }
 }

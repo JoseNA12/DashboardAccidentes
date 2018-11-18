@@ -19,7 +19,7 @@ namespace DashboardAccidentes.Negocio
         // Obtener los años de los registro de los accidentes
         public List<string> getAnnios()
         {
-            string query = "select distinct annio from ACCIDENTE";
+            string query = "select distinct a.annio from ACCIDENTE a order by a.annio asc";
             return RealizarSelect(query, "annio");
         }
 
