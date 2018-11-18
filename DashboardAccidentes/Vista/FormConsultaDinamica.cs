@@ -154,6 +154,92 @@ namespace DashboardAccidentes.Vista
             comboBox_fechaFinal.Items.Add("Sin año");
         }
 
+        #region Obtención de datos cuando se realiza la acción consultar
+
+        private List<string> getProvincasMarcadas()
+        {
+            List<string> misProvincias = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_provincias.Items.Count - 1); i++)
+            {
+                if (checkedListBox_provincias.GetItemChecked(i))
+                {
+                    misProvincias.Add(checkedListBox_provincias.Items[i].ToString());
+                }
+            }
+            return misProvincias;
+        }
+
+        private List<string> getCantonesMarcados()
+        {
+            List<string> misCantones = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_cantones.Items.Count - 1); i++)
+            {
+                if (checkedListBox_cantones.GetItemChecked(i))
+                {
+                    misCantones.Add(checkedListBox_cantones.Items[i].ToString());
+                }
+            }
+            return misCantones;
+        }
+
+        private List<string> getDistritosMarcados()
+        {
+            List<string> misDistritos = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_distritos.Items.Count - 1); i++)
+            {
+                if (checkedListBox_distritos.GetItemChecked(i))
+                {
+                    misDistritos.Add(checkedListBox_distritos.Items[i].ToString());
+                }
+            }
+            return misDistritos;
+        }
+
+        private List<string> getAniosMarcados()
+        {
+            string anioInicio = "";
+            string anioFinal = "";
+
+            if (comboBox_fechaInicial.SelectedItem != null)
+            {
+                anioInicio = comboBox_fechaInicial.SelectedItem.ToString();
+
+                if (comboBox_fechaFinal.SelectedItem != null)
+                {
+                    if (!comboBox_fechaFinal.SelectedItem.ToString().Equals("Sin año"))
+                    {
+                        anioFinal = comboBox_fechaFinal.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        anioFinal = comboBox_fechaInicial.SelectedItem.ToString(); 
+                    }
+
+                    if (int.Parse(anioInicio) <= int.Parse(anioFinal))
+                    {
+                        List<string> anios = new List<string> { anioInicio, anioFinal };
+                        return anios;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private Dictionary<string, string> getIndicadoresMarcados()
+        {
+            Dictionary<string, string> misIndicadores = new Dictionary<string, string>(); // Orden: <indicador, valor>
+
+            foreach (ListViewItem itemRow in this.listView_misIndicadores.Items)
+            {
+                misIndicadores.Add(itemRow.SubItems[0].Text, itemRow.SubItems[1].Text);
+            }
+            return misIndicadores;
+        }
+        #endregion
+
         private void checkedListBox_provincias_SelectedIndexChanged(object sender, EventArgs e)
         {
             //string s;
@@ -204,7 +290,7 @@ namespace DashboardAccidentes.Vista
                                     new List<string> { checkedListBox_cantones.CheckedItems[0].ToString() })
                                     );
 
-                    checkedListBox_distritos.Items.AddRange(miCarrito.getGenerico().ToArray());
+                checkedListBox_distritos.Items.AddRange(miCarrito.getGenerico().ToArray());
             }
             else
             {
@@ -268,63 +354,26 @@ namespace DashboardAccidentes.Vista
         private void btn_consultar_Click(object sender, EventArgs e)
         {
             // HACER LA VALIDACIONES NECESARIAS
+            List<string> anios = getAniosMarcados();
 
-            // Provincias
-            List<string> misProvincias = new List<string>();
-
-            for (int i = 0; i <= (checkedListBox_provincias.Items.Count - 1); i++)
+            if (anios != null)
             {
-                if (checkedListBox_provincias.GetItemChecked(i))
-                {
-                    misProvincias.Add(checkedListBox_provincias.Items[i].ToString());
-                }
+                List<string> misProvincias = getProvincasMarcadas();
+                List<string> misCantones = getCantonesMarcados();
+                List<string> misDistritos = getDistritosMarcados();
+                Dictionary<string, string> misIndicadores = getIndicadoresMarcados();
+
+
+                // RESULTADO PARA ENVIAR
+                DTO miCarrito = new DTO(misProvincias, misCantones, misCantones, anios, misIndicadores);
+                miControlador.RealizarConsultaDinamica(miCarrito);
+
+                //ObtenerImagenMapa();
             }
-
-            // Cantones
-            List<string> misCantones = new List<string>();
-
-            for (int i = 0; i <= (checkedListBox_cantones.Items.Count - 1); i++)
+            else
             {
-                if (checkedListBox_cantones.GetItemChecked(i))
-                {
-                    misCantones.Add(checkedListBox_cantones.Items[i].ToString());
-                }
+                MessageBox.Show("Error, por favor indique los años correctamente!.", "Atención!");
             }
-
-            // Distritos
-            List<string> misDistritos = new List<string>();
-
-            for (int i = 0; i <= (checkedListBox_distritos.Items.Count - 1); i++)
-            {
-                if (checkedListBox_distritos.GetItemChecked(i))
-                {
-                    misCantones.Add(checkedListBox_distritos.Items[i].ToString());
-                }
-            }
-
-            // Indicadores
-            Dictionary<string, string> misIndicadores = new Dictionary<string, string>();
-            //       <indicador, valor>
-
-            foreach (ListViewItem itemRow in this.listView_misIndicadores.Items)
-            {
-                misIndicadores.Add(itemRow.SubItems[0].Text, itemRow.SubItems[1].Text);
-            }
-
-            // Años
-            string anioInicio = comboBox_fechaInicial.SelectedText;
-            string anioFinal = "";
-            if (!comboBox_fechaFinal.SelectedText.Equals("Sin año")) { anioFinal = comboBox_fechaFinal.SelectedText; }
-
-            List<string> anios = new List<string>(); anios.Add(anioInicio); anios.Add(anioFinal);
-
-
-
-            // RESULTADO PARA ENVIAR
-            DTO miLambo = new DTO(misProvincias, misCantones, misCantones, anios, misIndicadores);
-            miControlador.RealizarConsultaDinamica(miLambo);
-
-            ObtenerImagenMapa();
         }
 
         private void ObtenerImagenMapa()
@@ -361,7 +410,7 @@ namespace DashboardAccidentes.Vista
 
         }
 
-        // Una vez recibidos los nonmbre de los enum's, tratar los strings para ser mostrador en pantalla
+        // Una vez recibidos los nombres de los enum's, tratar los strings para ser mostrador en pantalla
         private List<string> DarFormatoEnumIndicador(List<string> pIndicadores)
         {
             List<string> indicadores = new List<string>();
