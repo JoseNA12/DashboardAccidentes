@@ -63,6 +63,7 @@
             this.btn_consultar = new System.Windows.Forms.Button();
             this.pb_imagenMapa = new System.Windows.Forms.PictureBox();
             this.progressBar_consulta = new System.Windows.Forms.ProgressBar();
+            this.lb_msg = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             this.pnlMenuGroup_distritos.SuspendLayout();
             this.pnlMenuGroup_cantones.SuspendLayout();
@@ -456,12 +457,20 @@
             // 
             // progressBar_consulta
             // 
-            this.progressBar_consulta.Location = new System.Drawing.Point(835, 572);
+            this.progressBar_consulta.Location = new System.Drawing.Point(835, 581);
             this.progressBar_consulta.Name = "progressBar_consulta";
             this.progressBar_consulta.Size = new System.Drawing.Size(312, 14);
             this.progressBar_consulta.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar_consulta.TabIndex = 21;
             this.progressBar_consulta.Visible = false;
+            // 
+            // lb_msg
+            // 
+            this.lb_msg.AutoSize = true;
+            this.lb_msg.Location = new System.Drawing.Point(835, 568);
+            this.lb_msg.Name = "lb_msg";
+            this.lb_msg.Size = new System.Drawing.Size(0, 13);
+            this.lb_msg.TabIndex = 22;
             // 
             // FormConsultaDinamica
             // 
@@ -469,6 +478,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1184, 681);
+            this.Controls.Add(this.lb_msg);
             this.Controls.Add(this.progressBar_consulta);
             this.Controls.Add(this.pb_imagenMapa);
             this.Controls.Add(this.btn_consultar);
@@ -535,5 +545,6 @@
         private System.Windows.Forms.PictureBox pb_imagenMapa;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ProgressBar progressBar_consulta;
+        private System.Windows.Forms.Label lb_msg;
     }
 }

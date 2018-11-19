@@ -140,8 +140,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_consultar);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1200, 720);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1200, 720);
             this.Name = "FormConsultaLibre";
             this.Text = "Consulta libre";

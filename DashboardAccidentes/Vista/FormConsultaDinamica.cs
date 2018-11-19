@@ -364,6 +364,7 @@ namespace DashboardAccidentes.Vista
                 Dictionary<string, string> misIndicadores = getIndicadoresMarcados();
 
                 // RESULTADO PARA ENVIAR
+                
                 DTO miCarrito = new DTO(misProvincias, misCantones, misDistritos, anios, misIndicadores);
                 DTO miResultado = miControlador.RealizarConsultaDinamica(miCarrito);
 
@@ -371,8 +372,9 @@ namespace DashboardAccidentes.Vista
                 {
                     progressBar_consulta.Visible = true;
                     btn_consultar.Enabled = false;
+                    lb_msg.Text = "Generando imagen GPS...";
 
-                    Thread currentThread = new Thread(delegate()
+                    Thread currentThread = new Thread(delegate ()
                     {
                         DesplegarImagenMapa(miResultado);
 
@@ -380,6 +382,7 @@ namespace DashboardAccidentes.Vista
                         {
                             progressBar_consulta.Visible = false;
                             btn_consultar.Enabled = true;
+                            lb_msg.Text = "";
                         });
                     }
                     );
