@@ -150,7 +150,7 @@ namespace DashboardAccidentes.Vista
             comboBox_fechaInicial.Items.AddRange(miCarrito.getAnios().ToArray());
             comboBox_fechaFinal.Items.AddRange(miCarrito.getAnios().ToArray());
             checkedListBox_provincias.Items.AddRange(miCarrito.getProvincias().ToArray());
-            comboBox_indicador.Items.AddRange(DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
+            comboBox_indicador.Items.AddRange(TratarEnum.DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
 
             comboBox_fechaFinal.Items.Add("Sin año");
         }
@@ -304,7 +304,7 @@ namespace DashboardAccidentes.Vista
             comboBox_valorIndicador.Items.Clear();
 
             DTO miCarrito = miControlador.getValores_De_Indicador(
-                FormatearEnumIdicadores(comboBox_indicador.SelectedItem.ToString()));
+                TratarEnum.FormatearEnumIdicadores(comboBox_indicador.SelectedItem.ToString()));
 
             comboBox_valorIndicador.Items.AddRange(miCarrito.getGenerico().ToArray());
         }
@@ -331,12 +331,12 @@ namespace DashboardAccidentes.Vista
                 }
                 else
                 {
-                    MessageBox.Show("Error, el indicador ya ha sido registrado!");
+                    MessageBox.Show("El indicador ya ha sido registrado!", "Error");
                 }
             }
             else
             {
-                MessageBox.Show("Error, los campos del indicador y el valor deben tener un valor seleccionado!");
+                MessageBox.Show("Los campos del indicador y el valor deben tener un valor seleccionado!", "Error");
             }
         }
 
@@ -348,7 +348,7 @@ namespace DashboardAccidentes.Vista
             }
             else
             {
-                MessageBox.Show("Error, debe seleccionar un indicador para poder eliminarlo de su busqueda!");
+                MessageBox.Show("Debe seleccionar un indicador para poder eliminarlo de su busqueda!", "Error");
             }
         }
 
@@ -367,18 +367,28 @@ namespace DashboardAccidentes.Vista
                 DTO miCarrito = new DTO(misProvincias, misCantones, misDistritos, anios, misIndicadores);
                 DTO miResultado = miControlador.RealizarConsultaDinamica(miCarrito);
 
-                progressBar_consulta.Visible = true;
-
                 if (miResultado.getResultadoDinamica().Count() > 0)
                 {
-                    DesplegarImagenMapa(miResultado);
+                    progressBar_consulta.Visible = true;
+                    btn_consultar.Enabled = false;
+
+                    Thread currentThread = new Thread(delegate()
+                    {
+                        DesplegarImagenMapa(miResultado);
+
+                        Invoke((MethodInvoker)delegate ()
+                        {
+                            progressBar_consulta.Visible = false;
+                            btn_consultar.Enabled = true;
+                        });
+                    }
+                    );
+                    currentThread.Start();
                 }
                 else
                 {
                     MessageBox.Show("No se han encontrado accidentes con los parametros indicados!.", "Atención!");
                 }
-
-                progressBar_consulta.Visible = false;
             }
             else
             {
@@ -388,7 +398,7 @@ namespace DashboardAccidentes.Vista
 
         private void DesplegarImagenMapa(DTO miResultado)
         {
-            string miURL = miControlador.ConstruirURL("790,575", miResultado.getResultadoDinamica());
+            string miURL = miControlador.ConstruirURL(miResultado.getResultadoDinamica());
  
             Uri uri = new Uri(miURL);
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(uri);
@@ -399,27 +409,8 @@ namespace DashboardAccidentes.Vista
             httpResponse.Close();
             imageStream.Close();
 
-            //Load Image
+            //Cargar imagen
             pb_imagenMapa.Image = buddyIcon;
-
-        }
-
-        // Una vez recibidos los nombres de los enum's, tratar los strings para ser mostrador en pantalla
-        private List<string> DarFormatoEnumIndicador(List<string> pIndicadores)
-        {
-            List<string> indicadores = new List<string>();
-
-            for(int i = 0; i < pIndicadores.Count; i++)
-            {
-                indicadores.Add(pIndicadores[i].Replace("_", " "));
-            }
-            return indicadores;
-        }
-
-        // Para cuando envio al controlador el indicador que seleccioné, enviarle el mismo nombre "original" del enum como tal
-        private string FormatearEnumIdicadores(string pIndicador)
-        {
-            return pIndicador.Replace(" ", "_");
         }
     }
 }

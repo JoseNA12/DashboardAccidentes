@@ -45,16 +45,16 @@ namespace DashboardAccidentes.Negocio
             return dt_procesado;
         }
 
-        public List<ResultadoConsultaDinamica> realizarConsulta(QueryDinamica query) //TODO no se si vamos a pasarle el query por un dto o por parametros separados
+        public List<ResultadoDinamica> realizarConsulta(QueryDinamica query) //TODO no se si vamos a pasarle el query por un dto o por parametros separados
         {
             DAO_Query dao = new DAO_Query();
             DataTable datos = procesarResultadosQuery(dao.correrQueryDinamico(query));
 
-            List<ResultadoConsultaDinamica> info = new List<ResultadoConsultaDinamica>();
+            List<ResultadoDinamica> info = new List<ResultadoDinamica>();
 
             foreach (DataRow row in datos.Rows) // nombre_[provincia|canton|distrito], latitud, longitud, Accidentes
             {
-                ResultadoConsultaDinamica miResultado = new ResultadoConsultaDinamica();
+                ResultadoDinamica miResultado = new ResultadoDinamica();
                 //resultado.setProvincia(row["nombre_provincia"].ToString());
                 //resultado.setCanton(row["nombre_canton"].ToString());
                 //resultado.setDistrito(row["nombre_distrito"].ToString());

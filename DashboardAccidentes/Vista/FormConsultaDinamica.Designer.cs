@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -409,11 +409,11 @@
             this.columna_indicador,
             this.columna_valor});
             this.listView_misIndicadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            listViewGroup4.Header = "Mi Busqueda";
-            listViewGroup4.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            listViewGroup4.Name = "miBusqueda";
+            listViewGroup1.Header = "Mi Busqueda";
+            listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            listViewGroup1.Name = "miBusqueda";
             this.listView_misIndicadores.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup4});
+            listViewGroup1});
             this.listView_misIndicadores.Location = new System.Drawing.Point(0, 28);
             this.listView_misIndicadores.Name = "listView_misIndicadores";
             this.listView_misIndicadores.Size = new System.Drawing.Size(312, 174);
@@ -458,7 +458,7 @@
             // 
             this.progressBar_consulta.Location = new System.Drawing.Point(835, 572);
             this.progressBar_consulta.Name = "progressBar_consulta";
-            this.progressBar_consulta.Size = new System.Drawing.Size(312, 23);
+            this.progressBar_consulta.Size = new System.Drawing.Size(312, 14);
             this.progressBar_consulta.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar_consulta.TabIndex = 21;
             this.progressBar_consulta.Visible = false;
@@ -478,6 +478,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlMenu);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1200, 720);
+            this.MinimumSize = new System.Drawing.Size(1200, 720);
             this.Name = "FormConsultaDinamica";
             this.Text = "Consulta dinámica de indicadores";
             this.Load += new System.EventHandler(this.FormConsultaDinamica_Load);

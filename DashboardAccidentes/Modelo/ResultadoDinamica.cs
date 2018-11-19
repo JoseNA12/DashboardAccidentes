@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DashboardAccidentes.Negocio
 {
-    public class ResultadoConsultaDinamica
+    public class ResultadoDinamica
     {
         private string provincia;
         private string canton;
@@ -15,7 +15,7 @@ namespace DashboardAccidentes.Negocio
         private string longitud;
         private string accidentes;
 
-        public ResultadoConsultaDinamica(string provincia, string canton, string distrito, string latitud, string longitud, string accidentes)
+        public ResultadoDinamica(string provincia, string canton, string distrito, string latitud, string longitud, string accidentes)
         {
             this.provincia = provincia;
             this.canton = canton;
@@ -25,7 +25,7 @@ namespace DashboardAccidentes.Negocio
             this.accidentes = accidentes;
         }
 
-        public ResultadoConsultaDinamica() { }
+        public ResultadoDinamica() { }
 
         public void setProvincia(string provincia)
         {

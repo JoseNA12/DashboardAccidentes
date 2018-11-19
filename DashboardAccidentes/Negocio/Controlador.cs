@@ -11,8 +11,6 @@ namespace DashboardAccidentes.Negocio
     {
         private DAO_Carga miDao;
         private DatosGrafico datosGrafico;
-        public ConfigMapa configMapa = new ConfigMapa();
-
 
         // Datos visuales unicamente
         public DTO CargarDatos()
@@ -136,16 +134,22 @@ namespace DashboardAccidentes.Negocio
             datosGrafico.subscribir(new GraficoBarras(grafico));
         }
 
-        public string ConstruirURL(string tamanio, List<ResultadoConsultaDinamica> lista)
+        public string ConstruirURL(List<ResultadoDinamica> lista)
         {
-            string url = configMapa.getURL_base() + configMapa.getKeyMap() + configMapa.getTagTamanio() + tamanio + configMapa.getTagUbicaciones();
+            string URL_base = "https://open.mapquestapi.com/staticmap/v5/map?key=";
+            string keyMap = "5vUpKQGPuRhI9lkAbxKaMA2RU7wDGvnj";
+            string ubicaciones = "&locations=";
+            string tamanio = "&size=790,575";
+            string marcador = "flag-";
+
+            string url = URL_base + keyMap + tamanio + tamanio + ubicaciones;
 
             for (int i = 0; i < lista.Count(); i++)
             {
-                ResultadoConsultaDinamica result = lista[i];
+                ResultadoDinamica result = lista[i];
 
                 url += result.getLatitud() + "," + result.getLongitud() + "|"
-                    + configMapa.getTagMarcador() + result.getAccidentes();
+                    + marcador + result.getAccidentes();
 
                 if (i != lista.Count() - 1)
                 {
@@ -154,5 +158,6 @@ namespace DashboardAccidentes.Negocio
             }
             return url;
         }
+
     }
 }
