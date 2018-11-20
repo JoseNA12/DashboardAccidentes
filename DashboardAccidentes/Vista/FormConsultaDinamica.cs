@@ -366,9 +366,10 @@ namespace DashboardAccidentes.Vista
                 // RESULTADO PARA ENVIAR
                 
                 DTO miCarrito = new DTO(misProvincias, misCantones, misDistritos, anios, misIndicadores);
+                //DTO miResultado = miControlador.RealizarConsultaDinamica(miCarrito);
                 DTO miResultado = miControlador.RealizarConsultaDinamica(miCarrito);
 
-                if (miResultado.getResultadoDinamica().Count() > 0)
+                if (miResultado.getURL() != null)
                 {
                     progressBar_consulta.Visible = true;
                     btn_consultar.Enabled = false;
@@ -376,7 +377,7 @@ namespace DashboardAccidentes.Vista
 
                     Thread currentThread = new Thread(delegate ()
                     {
-                        DesplegarImagenMapa(miResultado);
+                        DesplegarImagenMapa(miResultado.getURL());
 
                         Invoke((MethodInvoker)delegate ()
                         {
@@ -399,11 +400,11 @@ namespace DashboardAccidentes.Vista
             }
         }
 
-        private void DesplegarImagenMapa(DTO miResultado)
+        private void DesplegarImagenMapa(string URL) // recibiria un string solamente
         {
-            string miURL = miControlador.ConstruirURL(miResultado.getResultadoDinamica());
+            //string miURL = miControlador.ConstruirURL(miResultado.getResultadoDinamica());
  
-            Uri uri = new Uri(miURL);
+            Uri uri = new Uri(URL);
             HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(uri);
 
             HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DashboardAccidentes.Negocio.Iterator;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -45,16 +46,29 @@ namespace DashboardAccidentes.Negocio
             return dt_procesado;
         }
 
-        public List<ResultadoDinamica> realizarConsulta(QueryDinamica query) //TODO no se si vamos a pasarle el query por un dto o por parametros separados
+        public ColeccionResultado realizarConsulta(QueryDinamica query) //TODO no se si vamos a pasarle el query por un dto o por parametros separados
         {
             DAO_Query dao = new DAO_Query();
             DataTable datos = procesarResultadosQuery(dao.correrQueryDinamico(query));
 
-            List<ResultadoDinamica> info = new List<ResultadoDinamica>();
+            //List<ResultadoDinamica> info = new List<ResultadoDinamica>();
+
+            //--
+            ColeccionResultado resultados = new ColeccionResultado();
+            //--
 
             foreach (DataRow row in datos.Rows) // nombre_[provincia|canton|distrito], latitud, longitud, Accidentes
             {
-                ResultadoDinamica miResultado = new ResultadoDinamica();
+                //--
+                resultados.addResultado
+                    (
+                    row["Accidentes"].ToString(),
+                    convertirCoordenada(row["latitud"].ToString()),
+                    convertirCoordenada(row["longitud"].ToString())
+                    );
+                //--
+
+                /*ResultadoDinamica miResultado = new ResultadoDinamica();
                 //resultado.setProvincia(row["nombre_provincia"].ToString());
                 //resultado.setCanton(row["nombre_canton"].ToString());
                 //resultado.setDistrito(row["nombre_distrito"].ToString());
@@ -62,10 +76,10 @@ namespace DashboardAccidentes.Negocio
                 miResultado.setLongitud(convertirCoordenada(row["longitud"].ToString()));
                 miResultado.setAccidentes(row["Accidentes"].ToString());
 
-                info.Add(miResultado);
+                info.Add(miResultado);*/
             }
 
-            return info;
+            return resultados;
         }
 
         private string convertirCoordenada(string coordenada)

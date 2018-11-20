@@ -16,6 +16,7 @@ namespace DashboardAccidentes.Negocio
         private Dictionary<string, string> indicadoresUsuario; // indicadores del usuario cuando consulta
         private List<string> generico; // utilizado para transportar los datos cuando el usuario selecciona una provincia, indicador, etc. (más que todo por la sobrecarga de constructores)
         private List<ResultadoDinamica> resultadoDinamica;
+        private string url;
 
         public DTO(List<string> provincias, List<string> cantones, List<string> distritos, List<string> indicadores, List<string> anios)
         {
@@ -46,7 +47,12 @@ namespace DashboardAccidentes.Negocio
             this.anios = anios;
             this.indicadoresUsuario = indicadoresUsuario;
         }
-
+        //--
+        public DTO(string url)
+        {
+            this.url = url;
+        }
+        //--
         public DTO(List<ResultadoDinamica> resultadoDinamica)
         {
             this.resultadoDinamica = resultadoDinamica;
@@ -90,6 +96,11 @@ namespace DashboardAccidentes.Negocio
         public List<ResultadoDinamica> getResultadoDinamica()
         {
             return resultadoDinamica;
+        }
+
+        public string getURL()
+        {
+            return url;
         }
     }
 }

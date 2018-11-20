@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DashboardAccidentes.Negocio.Iterator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -110,7 +111,7 @@ namespace DashboardAccidentes.Negocio
 
             Handler_Mapas miManejador = new Handler_Mapas();
 
-            DTO miCarrito = new DTO(miManejador.realizarConsulta(queryDinamica));
+            DTO miCarrito = new DTO(ConstruirURL(miManejador.realizarConsulta(queryDinamica)));
 
             return miCarrito;
         }
@@ -134,8 +135,10 @@ namespace DashboardAccidentes.Negocio
             datosGrafico.subscribir(new GraficoBarras(grafico));
         }
 
-        public string ConstruirURL(List<ResultadoDinamica> lista)
+        public string ConstruirURL(ColeccionResultado coleccion)
         {
+            Iterador miIterador = coleccion.crearIterador();
+
             string URL_base = "https://open.mapquestapi.com/staticmap/v5/map?key=";
             string keyMap = "5vUpKQGPuRhI9lkAbxKaMA2RU7wDGvnj";
             string ubicaciones = "&locations=";
@@ -144,18 +147,24 @@ namespace DashboardAccidentes.Negocio
 
             string url = URL_base + keyMap + tamanio + tamanio + ubicaciones;
 
-            for (int i = 0; i < lista.Count(); i++)
+            if (!miIterador.tieneSiguiente())
             {
-                ResultadoDinamica result = lista[i];
+                return null; // sin resultados
+            }
+
+            while (miIterador.tieneSiguiente())
+            {
+                ResultadoDinamica result = (ResultadoDinamica) miIterador.siguiente();
 
                 url += result.getLatitud() + "," + result.getLongitud() + "|"
                     + marcador + result.getAccidentes();
 
-                if (i != lista.Count() - 1)
+                if (miIterador.tieneSiguiente())
                 {
                     url += "||";
                 }
             }
+
             return url;
         }
 
