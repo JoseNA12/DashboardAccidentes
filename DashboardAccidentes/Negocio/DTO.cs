@@ -13,8 +13,10 @@ namespace DashboardAccidentes.Negocio
         private List<string> distritos;
         private List<string> anios;
         private List<string> indicadores; // solo cargar info
-        private Dictionary<string, string> misIndicadores; // indicadores del usuario cuando consulta
+        private Dictionary<string, string> indicadoresUsuario; // indicadores del usuario cuando consulta
         private List<string> generico; // utilizado para transportar los datos cuando el usuario selecciona una provincia, indicador, etc. (más que todo por la sobrecarga de constructores)
+        private List<ResultadoDinamica> resultadoDinamica;
+        private string url;
 
         public DTO(List<string> provincias, List<string> cantones, List<string> distritos, List<string> indicadores, List<string> anios)
         {
@@ -37,13 +39,23 @@ namespace DashboardAccidentes.Negocio
             this.generico = generico;
         }
 
-        public DTO(List<string> provincias, List<string> cantones, List<string> distritos, List<string> anios, Dictionary<string, string> misIndicadores)
+        public DTO(List<string> provincias, List<string> cantones, List<string> distritos, List<string> anios, Dictionary<string, string> indicadoresUsuario)
         {
             this.provincias = provincias;
             this.cantones = cantones;
             this.distritos = distritos;
             this.anios = anios;
-            this.misIndicadores = misIndicadores;
+            this.indicadoresUsuario = indicadoresUsuario;
+        }
+        //--
+        public DTO(string url)
+        {
+            this.url = url;
+        }
+        //--
+        public DTO(List<ResultadoDinamica> resultadoDinamica)
+        {
+            this.resultadoDinamica = resultadoDinamica;
         }
 
         public List<string> getProvincias()
@@ -76,9 +88,19 @@ namespace DashboardAccidentes.Negocio
             return generico;
         }
 
-        public Dictionary<string, string> getMisIndicadores()
+        public Dictionary<string, string> getIndicadoresUsuario()
         {
-            return misIndicadores;
+            return indicadoresUsuario;
+        }
+
+        public List<ResultadoDinamica> getResultadoDinamica()
+        {
+            return resultadoDinamica;
+        }
+
+        public string getURL()
+        {
+            return url;
         }
     }
 }

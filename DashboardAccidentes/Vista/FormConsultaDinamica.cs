@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -149,10 +150,96 @@ namespace DashboardAccidentes.Vista
             comboBox_fechaInicial.Items.AddRange(miCarrito.getAnios().ToArray());
             comboBox_fechaFinal.Items.AddRange(miCarrito.getAnios().ToArray());
             checkedListBox_provincias.Items.AddRange(miCarrito.getProvincias().ToArray());
-            comboBox_indicador.Items.AddRange(DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
+            comboBox_indicador.Items.AddRange(TratarEnum.DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
 
             comboBox_fechaFinal.Items.Add("Sin año");
         }
+
+        #region Obtención de datos cuando se realiza la acción consultar
+
+        private List<string> getProvincasMarcadas()
+        {
+            List<string> misProvincias = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_provincias.Items.Count - 1); i++)
+            {
+                if (checkedListBox_provincias.GetItemChecked(i))
+                {
+                    misProvincias.Add(checkedListBox_provincias.Items[i].ToString());
+                }
+            }
+            return misProvincias;
+        }
+
+        private List<string> getCantonesMarcados()
+        {
+            List<string> misCantones = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_cantones.Items.Count - 1); i++)
+            {
+                if (checkedListBox_cantones.GetItemChecked(i))
+                {
+                    misCantones.Add(checkedListBox_cantones.Items[i].ToString());
+                }
+            }
+            return misCantones;
+        }
+
+        private List<string> getDistritosMarcados()
+        {
+            List<string> misDistritos = new List<string>();
+
+            for (int i = 0; i <= (checkedListBox_distritos.Items.Count - 1); i++)
+            {
+                if (checkedListBox_distritos.GetItemChecked(i))
+                {
+                    misDistritos.Add(checkedListBox_distritos.Items[i].ToString());
+                }
+            }
+            return misDistritos;
+        }
+
+        private List<string> getAniosMarcados()
+        {
+            string anioInicio = "";
+            string anioFinal = "";
+
+            if (comboBox_fechaInicial.SelectedItem != null)
+            {
+                anioInicio = comboBox_fechaInicial.SelectedItem.ToString();
+
+                if (comboBox_fechaFinal.SelectedItem != null)
+                {
+                    if (!comboBox_fechaFinal.SelectedItem.ToString().Equals("Sin año"))
+                    {
+                        anioFinal = comboBox_fechaFinal.SelectedItem.ToString();
+                    }
+                    else
+                    {
+                        anioFinal = comboBox_fechaInicial.SelectedItem.ToString(); 
+                    }
+
+                    if (int.Parse(anioInicio) <= int.Parse(anioFinal))
+                    {
+                        List<string> anios = new List<string> { anioInicio, anioFinal };
+                        return anios;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private Dictionary<string, string> getIndicadoresMarcados()
+        {
+            Dictionary<string, string> misIndicadores = new Dictionary<string, string>(); // Orden: <indicador, valor>
+
+            foreach (ListViewItem itemRow in this.listView_misIndicadores.Items)
+            {
+                misIndicadores.Add(itemRow.SubItems[0].Text, itemRow.SubItems[1].Text);
+            }
+            return misIndicadores;
+        }
+        #endregion
 
         private void checkedListBox_provincias_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -204,7 +291,7 @@ namespace DashboardAccidentes.Vista
                                     new List<string> { checkedListBox_cantones.CheckedItems[0].ToString() })
                                     );
 
-                    checkedListBox_distritos.Items.AddRange(miCarrito.getGenerico().ToArray());
+                checkedListBox_distritos.Items.AddRange(miCarrito.getGenerico().ToArray());
             }
             else
             {
@@ -217,7 +304,7 @@ namespace DashboardAccidentes.Vista
             comboBox_valorIndicador.Items.Clear();
 
             DTO miCarrito = miControlador.getValores_De_Indicador(
-                FormatearEnumIdicadores(comboBox_indicador.SelectedItem.ToString()));
+                TratarEnum.FormatearEnumIdicadores(comboBox_indicador.SelectedItem.ToString()));
 
             comboBox_valorIndicador.Items.AddRange(miCarrito.getGenerico().ToArray());
         }
@@ -244,12 +331,12 @@ namespace DashboardAccidentes.Vista
                 }
                 else
                 {
-                    MessageBox.Show("Error, el indicador ya ha sido registrado!");
+                    MessageBox.Show("El indicador ya ha sido registrado!", "Error");
                 }
             }
             else
             {
-                MessageBox.Show("Error, los campos del indicador y el valor deben tener un valor seleccionado!");
+                MessageBox.Show("Los campos del indicador y el valor deben tener un valor seleccionado!", "Error");
             }
         }
 
@@ -261,94 +348,64 @@ namespace DashboardAccidentes.Vista
             }
             else
             {
-                MessageBox.Show("Error, debe seleccionar un indicador para poder eliminarlo de su busqueda!");
+                MessageBox.Show("Debe seleccionar un indicador para poder eliminarlo de su busqueda!", "Error");
             }
         }
 
         private void btn_consultar_Click(object sender, EventArgs e)
         {
-            // HACER LA VALIDACIONES NECESARIAS
+            List<string> anios = getAniosMarcados();
 
-            // Provincias
-            List<string> misProvincias = new List<string>();
-
-            for (int i = 0; i <= (checkedListBox_provincias.Items.Count - 1); i++)
+            if (anios != null)
             {
-                if (checkedListBox_provincias.GetItemChecked(i))
+                List<string> misProvincias = getProvincasMarcadas();
+                List<string> misCantones = getCantonesMarcados();
+                List<string> misDistritos = getDistritosMarcados();
+                Dictionary<string, string> misIndicadores = getIndicadoresMarcados();
+
+                // RESULTADO PARA ENVIAR
+                
+                DTO miCarrito = new DTO(misProvincias, misCantones, misDistritos, anios, misIndicadores);
+                //DTO miResultado = miControlador.RealizarConsultaDinamica(miCarrito);
+                DTO miResultado = miControlador.RealizarConsultaDinamica(miCarrito);
+
+                if (miResultado.getURL() != null)
                 {
-                    misProvincias.Add(checkedListBox_provincias.Items[i].ToString());
+                    progressBar_consulta.Visible = true;
+                    btn_consultar.Enabled = false;
+                    lb_msg.Text = "Generando imagen GPS...";
+
+                    Thread currentThread = new Thread(delegate ()
+                    {
+                        DesplegarImagenMapa(miResultado.getURL());
+
+                        Invoke((MethodInvoker)delegate ()
+                        {
+                            progressBar_consulta.Visible = false;
+                            btn_consultar.Enabled = true;
+                            lb_msg.Text = "";
+                        });
+                    }
+                    );
+                    currentThread.Start();
+                }
+                else
+                {
+                    MessageBox.Show("No se han encontrado accidentes con los parametros indicados!.", "Atención!");
                 }
             }
-
-            // Cantones
-            List<string> misCantones = new List<string>();
-
-            for (int i = 0; i <= (checkedListBox_cantones.Items.Count - 1); i++)
+            else
             {
-                if (checkedListBox_cantones.GetItemChecked(i))
-                {
-                    misCantones.Add(checkedListBox_cantones.Items[i].ToString());
-                }
+                MessageBox.Show("Error, por favor indique los años correctamente!.", "Atención!");
             }
-
-            // Distritos
-            List<string> misDistritos = new List<string>();
-
-            for (int i = 0; i <= (checkedListBox_distritos.Items.Count - 1); i++)
-            {
-                if (checkedListBox_distritos.GetItemChecked(i))
-                {
-                    misCantones.Add(checkedListBox_distritos.Items[i].ToString());
-                }
-            }
-
-            // Indicadores
-            Dictionary<string, string> misIndicadores = new Dictionary<string, string>();
-            //       <indicador, valor>
-
-            foreach (ListViewItem itemRow in this.listView_misIndicadores.Items)
-            {
-                misIndicadores.Add(itemRow.SubItems[0].Text, itemRow.SubItems[1].Text);
-            }
-
-            // Años
-            string anioInicio = comboBox_fechaInicial.SelectedText;
-            string anioFinal = "";
-            if (!comboBox_fechaFinal.SelectedText.Equals("Sin año")) { anioFinal = comboBox_fechaFinal.SelectedText; }
-
-            List<string> anios = new List<string>(); anios.Add(anioInicio); anios.Add(anioFinal);
-
-
-
-            // RESULTADO PARA ENVIAR
-            DTO miLambo = new DTO(misProvincias, misCantones, misCantones, anios, misIndicadores);
-            miControlador.RealizarConsultaDinamica(miLambo);
-
-            ObtenerImagenMapa();
         }
 
-        private void ObtenerImagenMapa()
+        private void DesplegarImagenMapa(string URL) // recibiria un string solamente
         {
-            /* Guias
-            // https://developers.google.com/maps/documentation/maps-static/dev-guide
-            // https://csharp.hotexamples.com/examples/System.Windows.Forms/PictureBox/Load/php-picturebox-load-method-examples.html
-            // https://developers.google.com/maps/documentation/maps-static/intro?csw=1
-            // --------------
-            string googleKey = "AIzaSyARQO1lorK1UyiWJk438q1U7jCzZkXIj7c"; // NO modificar
-            string signature = "signature=p0Jo36aoj_ML4N0X1FjdH4P_6PE=";
-
-            string dir = "https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=400x400&markers=color:blue|label:S|62.107733,-145.541936&markers=size:tiny|color:green|Delta+Junction,AK&markers=size:mid|color:0xFFFF00|label:C|Tok,AK&key=" + googleKey;
-            string dir_2 = "https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=13&size=600x300&maptype=roadmap " +
-                   " & markers = color:blue % 7Clabel: S % 7C40.702147,-74.015794 & markers = color:green % 7Clabel: G % 7C40.711614,-74.012318" +
-                   "& markers = color:red % 7Clabel: C % 7C40.718217,-73.998284" +
-                   "& key = " + googleKey;
-            */
-
-            Uri uri_1 = new Uri("https://open.mapquestapi.com/staticmap/v5/map?key=" + miControlador.getKeyMap() + "&locations=New+York,NY|flag-putojaja||Buffalo,NY|flag-Holakh12||Rochester,NY|flag-drinkaa-md&size=790,575");
-
-            Uri uri_2 = new Uri("https://open.mapquestapi.com/staticmap/v5/map?key=" + miControlador.getKeyMap() + "&center=40.039401,-76.307078&size=686,520");
-
-            HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(uri_1);
+            //string miURL = miControlador.ConstruirURL(miResultado.getResultadoDinamica());
+ 
+            Uri uri = new Uri(URL);
+            HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(uri);
 
             HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
             Stream imageStream = httpResponse.GetResponseStream();
@@ -356,27 +413,8 @@ namespace DashboardAccidentes.Vista
             httpResponse.Close();
             imageStream.Close();
 
-            //Load Image
+            //Cargar imagen
             pb_imagenMapa.Image = buddyIcon;
-
-        }
-
-        // Una vez recibidos los nonmbre de los enum's, tratar los strings para ser mostrador en pantalla
-        private List<string> DarFormatoEnumIndicador(List<string> pIndicadores)
-        {
-            List<string> indicadores = new List<string>();
-
-            for(int i = 0; i < pIndicadores.Count; i++)
-            {
-                indicadores.Add(pIndicadores[i].Replace("_", " "));
-            }
-            return indicadores;
-        }
-
-        // Para cuando envio al controlador el indicador que seleccioné, enviarle el mismo nombre "original" del enum como tal
-        private string FormatearEnumIdicadores(string pIndicador)
-        {
-            return pIndicador.Replace(" ", "_");
         }
     }
 }

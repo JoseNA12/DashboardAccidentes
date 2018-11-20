@@ -105,6 +105,7 @@
             this.Controls.Add(this.btn_consulta_libre);
             this.Controls.Add(this.btn_consulta_indicadores);
             this.Controls.Add(this.btn_consulta_dinamica);
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(861, 590);
             this.MinimumSize = new System.Drawing.Size(861, 590);
             this.Name = "FormInicial";

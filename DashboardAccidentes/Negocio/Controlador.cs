@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DashboardAccidentes.Negocio.Iterator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,6 @@ namespace DashboardAccidentes.Negocio
     {
         private DAO_Carga miDao;
         private DatosGrafico datosGrafico;
-        private readonly string keyMap = "5vUpKQGPuRhI9lkAbxKaMA2RU7wDGvnj";
-
-        public string getKeyMap() { return keyMap; }
 
         // Datos visuales unicamente
         public DTO CargarDatos()
@@ -86,16 +84,36 @@ namespace DashboardAccidentes.Negocio
             return indicadores;
         }
 
-        public void RealizarConsultaDinamica(DTO miDTO)
+        public DTO RealizarConsultaDinamica(DTO miDTO)
         {
             List<string> provincias = miDTO.getProvincias();
             List<string> cantones = miDTO.getCantones();
             List<string> distritos = miDTO.getDistritos();
             string anioInicio = miDTO.getAnios()[0];
-            string aniFinal = miDTO.getAnios()[1];
-            Dictionary<string, string> indicadores = miDTO.getMisIndicadores();
+            string anioFinal = miDTO.getAnios()[1];
 
-            // Decorador
+            List<Indicador> indicadores = new List<Indicador>();
+
+            foreach (KeyValuePair<string, string> entry in miDTO.getIndicadoresUsuario())
+            {
+                indicadores.Add(new Indicador(entry.Key, entry.Value));
+            }
+
+            Localizaciones localizaciones = new Localizaciones(provincias, cantones, distritos);
+            QueryDinamica queryDinamica = new QueryDinamica(
+                provincias, 
+                cantones, 
+                distritos, 
+                int.Parse(anioInicio), 
+                int.Parse(anioFinal), 
+                indicadores
+            );
+
+            Handler_Mapas miManejador = new Handler_Mapas();
+
+            DTO miCarrito = new DTO(ConstruirURL(miManejador.realizarConsulta(queryDinamica)));
+
+            return miCarrito;
         }
 
         public void generarGrafico(string indicador, Chart grafico)
@@ -116,5 +134,39 @@ namespace DashboardAccidentes.Negocio
 
             datosGrafico.subscribir(new GraficoBarras(grafico));
         }
+
+        public string ConstruirURL(ColeccionResultado coleccion)
+        {
+            Iterador miIterador = coleccion.crearIterador();
+
+            string URL_base = "https://open.mapquestapi.com/staticmap/v5/map?key=";
+            string keyMap = "5vUpKQGPuRhI9lkAbxKaMA2RU7wDGvnj";
+            string ubicaciones = "&locations=";
+            string tamanio = "&size=790,575";
+            string marcador = "flag-";
+
+            string url = URL_base + keyMap + tamanio + tamanio + ubicaciones;
+
+            if (!miIterador.tieneSiguiente())
+            {
+                return null; // sin resultados
+            }
+
+            while (miIterador.tieneSiguiente())
+            {
+                ResultadoDinamica result = (ResultadoDinamica) miIterador.siguiente();
+
+                url += result.getLatitud() + "," + result.getLongitud() + "|"
+                    + marcador + result.getAccidentes();
+
+                if (miIterador.tieneSiguiente())
+                {
+                    url += "||";
+                }
+            }
+
+            return url;
+        }
+
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Mi Busqueda", System.Windows.Forms.HorizontalAlignment.Center);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -56,12 +56,14 @@
             this.label7 = new System.Windows.Forms.Label();
             this.panel_mi_busqueda = new System.Windows.Forms.Panel();
             this.btn_eliminarIndicador = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
             this.listView_misIndicadores = new System.Windows.Forms.ListView();
             this.columna_indicador = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columna_valor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_consultar = new System.Windows.Forms.Button();
             this.pb_imagenMapa = new System.Windows.Forms.PictureBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.progressBar_consulta = new System.Windows.Forms.ProgressBar();
+            this.lb_msg = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             this.pnlMenuGroup_distritos.SuspendLayout();
             this.pnlMenuGroup_cantones.SuspendLayout();
@@ -371,7 +373,7 @@
             this.panel_mi_busqueda.Controls.Add(this.listView_misIndicadores);
             this.panel_mi_busqueda.Location = new System.Drawing.Point(835, 359);
             this.panel_mi_busqueda.Name = "panel_mi_busqueda";
-            this.panel_mi_busqueda.Size = new System.Drawing.Size(312, 222);
+            this.panel_mi_busqueda.Size = new System.Drawing.Size(312, 206);
             this.panel_mi_busqueda.TabIndex = 18;
             // 
             // btn_eliminarIndicador
@@ -390,17 +392,29 @@
             this.btn_eliminarIndicador.UseVisualStyleBackColor = false;
             this.btn_eliminarIndicador.Click += new System.EventHandler(this.btn_eliminarIndicador_Click);
             // 
+            // label12
+            // 
+            this.label12.BackColor = System.Drawing.SystemColors.Highlight;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(0, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(312, 25);
+            this.label12.TabIndex = 21;
+            this.label12.Text = "Mi busqueda";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // listView_misIndicadores
             // 
             this.listView_misIndicadores.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columna_indicador,
             this.columna_valor});
             this.listView_misIndicadores.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            listViewGroup3.Header = "Mi Busqueda";
-            listViewGroup3.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
-            listViewGroup3.Name = "miBusqueda";
+            listViewGroup1.Header = "Mi Busqueda";
+            listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            listViewGroup1.Name = "miBusqueda";
             this.listView_misIndicadores.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup3});
+            listViewGroup1});
             this.listView_misIndicadores.Location = new System.Drawing.Point(0, 28);
             this.listView_misIndicadores.Name = "listView_misIndicadores";
             this.listView_misIndicadores.Size = new System.Drawing.Size(312, 174);
@@ -441,17 +455,22 @@
             this.pb_imagenMapa.TabIndex = 20;
             this.pb_imagenMapa.TabStop = false;
             // 
-            // label12
+            // progressBar_consulta
             // 
-            this.label12.BackColor = System.Drawing.SystemColors.Highlight;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.White;
-            this.label12.Location = new System.Drawing.Point(0, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(312, 25);
-            this.label12.TabIndex = 21;
-            this.label12.Text = "Mi busqueda";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.progressBar_consulta.Location = new System.Drawing.Point(835, 581);
+            this.progressBar_consulta.Name = "progressBar_consulta";
+            this.progressBar_consulta.Size = new System.Drawing.Size(312, 14);
+            this.progressBar_consulta.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar_consulta.TabIndex = 21;
+            this.progressBar_consulta.Visible = false;
+            // 
+            // lb_msg
+            // 
+            this.lb_msg.AutoSize = true;
+            this.lb_msg.Location = new System.Drawing.Point(835, 568);
+            this.lb_msg.Name = "lb_msg";
+            this.lb_msg.Size = new System.Drawing.Size(0, 13);
+            this.lb_msg.TabIndex = 22;
             // 
             // FormConsultaDinamica
             // 
@@ -459,6 +478,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1184, 681);
+            this.Controls.Add(this.lb_msg);
+            this.Controls.Add(this.progressBar_consulta);
             this.Controls.Add(this.pb_imagenMapa);
             this.Controls.Add(this.btn_consultar);
             this.Controls.Add(this.panel_mi_busqueda);
@@ -467,6 +488,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pnlMenu);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1200, 720);
+            this.MinimumSize = new System.Drawing.Size(1200, 720);
             this.Name = "FormConsultaDinamica";
             this.Text = "Consulta dinámica de indicadores";
             this.Load += new System.EventHandler(this.FormConsultaDinamica_Load);
@@ -520,5 +544,7 @@
         private System.Windows.Forms.Button btn_eliminarIndicador;
         private System.Windows.Forms.PictureBox pb_imagenMapa;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ProgressBar progressBar_consulta;
+        private System.Windows.Forms.Label lb_msg;
     }
 }

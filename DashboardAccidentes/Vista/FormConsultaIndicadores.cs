@@ -27,19 +27,7 @@ namespace DashboardAccidentes.Vista
             miControlador = new Controlador();
             DTO miCarrito = miControlador.CargarDatos();
 
-            comboBox_indicador.Items.AddRange(DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
-        }
-
-        // Una vez recibidos los nonmbre de los enum's, tratar los strings para ser mostrador en pantalla
-        private List<string> DarFormatoEnumIndicador(List<string> pIndicadores)
-        {
-            List<string> indicadores = new List<string>();
-
-            for (int i = 0; i < pIndicadores.Count; i++)
-            {
-                indicadores.Add(pIndicadores[i].Replace("_", " "));
-            }
-            return indicadores;
+            comboBox_indicador.Items.AddRange(TratarEnum.DarFormatoEnumIndicador(miCarrito.getIndicadores()).ToArray());
         }
 
         // Al hacer click en consultar llama al controlador y le pasa la ref. al grafico para que lo dibuje

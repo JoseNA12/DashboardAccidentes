@@ -34,7 +34,7 @@ namespace DashboardAccidentes.Negocio
             string query = Properties.Resources.ResourceManager.GetString("QUERY_LIBRE");
             query = string.Format(query, provincia, annio);
 
-            return  RealizarConsulta(query);
+            return RealizarConsulta(query);
         }
     }
 }
