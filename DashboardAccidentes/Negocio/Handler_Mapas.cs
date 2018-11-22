@@ -16,7 +16,7 @@ namespace DashboardAccidentes.Negocio
             string nombre_columna = dt.Columns[0].ColumnName;
 
             //Solo se procesan las consultas a nivel de provincia y canton
-            if (!nombre_columna.Equals("nombre_distrito") && !nombre_columna.Equals("latitud")) 
+            if (!nombre_columna.Equals("nombre_distrito") && dt.Rows.Count > 0) 
             {
                 dt_procesado = dt.AsEnumerable()
                     .GroupBy(r => r.Field<string>(0)) //Hace un group by por nombre de canton/provincia
