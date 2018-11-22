@@ -13,8 +13,10 @@ namespace DashboardAccidentes.Negocio
         public DataTable procesarResultadosQuery(DataTable dt)
         {
             var dt_procesado = dt;
+            string nombre_columna = dt.Columns[0].ColumnName;
 
-            if (!dt.Columns[0].ColumnName.Equals("nombre_distrito")) //Solo se procesan las consultas a nivel de provincia y canton
+            //Solo se procesan las consultas a nivel de provincia y canton
+            if (!nombre_columna.Equals("nombre_distrito") && !nombre_columna.Equals("latitud")) 
             {
                 dt_procesado = dt.AsEnumerable()
                     .GroupBy(r => r.Field<string>(0)) //Hace un group by por nombre de canton/provincia

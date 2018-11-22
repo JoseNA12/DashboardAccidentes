@@ -23,15 +23,15 @@ namespace DashboardAccidentes.Negocio
         {
             if(distritos.Count > 0) //Si es a nivel de distritos
             {
-                return "d.nombre_distrito";
+                return "d.nombre_distrito,";
             }
             else if (cantones.Count > 0) //Si es a nivel de cantones
             {
-                return "c.nombre_canton";
+                return "c.nombre_canton,";
             }
             else //Si es a nivel de provincias
             {
-                return "p.nombre_provincia";
+                return "p.nombre_provincia,";
             }
         }
 
@@ -60,7 +60,16 @@ namespace DashboardAccidentes.Negocio
             if (distritos.Count > 0)
                 partes_condicion.Add("(" + string.Join(" OR ", formatearStringsCondiciones("d.nombre_distrito", distritos)) + ")");
 
-            return string.Join(" AND ", partes_condicion);
+            string result = string.Join(" AND ", partes_condicion);
+
+            if (!result.Equals(string.Empty))
+            {
+                return result;
+            }
+            else
+            {
+                return "1 = 1";
+            }
         }
     }
 }

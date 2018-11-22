@@ -12,13 +12,23 @@ namespace DashboardAccidentes.Negocio
     {
         public DataTable correrQueryDinamico(QueryDinamica queryDinamica)
         {
-            TipoLesion tipoLesionDecorador = new TipoLesion(queryDinamica, queryDinamica.indicadores);
-            Genero generoDecorador = new Genero(tipoLesionDecorador, tipoLesionDecorador.indicadores);
-            EdadQuincenal edadQuincenal = new EdadQuincenal(generoDecorador, generoDecorador.indicadores);
-            TipoAfectado tipoAfectado = new TipoAfectado(edadQuincenal, edadQuincenal.indicadores);
+            string query = "";
+            
+            if(queryDinamica.indicadores.Count > 0)
+            {
+                TipoLesion tipoLesionDecorador = new TipoLesion(queryDinamica, queryDinamica.indicadores);
+                Genero generoDecorador = new Genero(tipoLesionDecorador, tipoLesionDecorador.indicadores);
+                EdadQuincenal edadQuincenal = new EdadQuincenal(generoDecorador, generoDecorador.indicadores);
+                TipoAfectado tipoAfectado = new TipoAfectado(edadQuincenal, edadQuincenal.indicadores);
 
-            string query = tipoAfectado.construirConsulta();
-            query = query.Replace(" AND {4}", "");
+                query = tipoAfectado.construirConsulta();
+                query = query.Replace(" AND {4}", "");
+            }
+            else
+            {
+                query = queryDinamica.construirConsulta();
+                query = query.Replace("{4}", "1 = 1");
+            }      
 
             return RealizarConsulta(query);
         }

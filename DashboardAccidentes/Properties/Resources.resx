@@ -201,7 +201,7 @@ GROUP BY rol.rol;</value>
     <comment>Query para obtener datos de grafico de la consulta libre. Es necesario usar string.Format() para insertar la provincia y el anno en el WHERE.</comment>
   </data>
   <data name="QUERY_DINAMICA_ESQUELETO" xml:space="preserve">
-    <value>SELECT {0}, l.latitud, l.longitud, COUNT(*) AS Accidentes
+    <value>SELECT {0} l.latitud, l.longitud, COUNT(*) AS Accidentes
 FROM 
 (
 ACCIDENTE ac INNER JOIN 
@@ -228,6 +228,6 @@ AND
 --Condiciones de indicadores
 ({4})
 
-GROUP BY {0}, l.latitud, l.longitud;</value>
+GROUP BY {0} l.latitud, l.longitud;</value>
   </data>
 </root>
