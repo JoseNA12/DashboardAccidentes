@@ -54,25 +54,30 @@
       <DependentUpon>AccidentesBDDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Negocio\Controlador.cs" />
-    <Compile Include="Negocio\DAO_Carga.cs" />
-    <Compile Include="Negocio\DAO_Query.cs" />
-    <Compile Include="Negocio\DAO_SQL.cs" />
-    <Compile Include="Negocio\DatosGrafico.cs" />
+    <Compile Include="Negocio\Dao\DAO_Carga.cs" />
+    <Compile Include="Negocio\Dao\DAO_Query.cs" />
+    <Compile Include="Negocio\Dao\DAO_SQL.cs" />
+    <Compile Include="Negocio\Iterator\Coleccion.cs" />
+    <Compile Include="Negocio\Iterator\ColeccionResultado.cs" />
+    <Compile Include="Negocio\Iterator\Iterador.cs" />
+    <Compile Include="Negocio\Iterator\IteradorResultado.cs" />
+    <Compile Include="Negocio\Observer\DatosGrafico.cs" />
     <Compile Include="Negocio\DTO.cs" />
-    <Compile Include="Negocio\EdadQuincenal.cs" />
+    <Compile Include="Negocio\Decorator\EdadQuincenal.cs" />
     <Compile Include="Negocio\GeneradorGraficos.cs" />
-    <Compile Include="Negocio\Genero.cs" />
-    <Compile Include="Negocio\GraficoBarras.cs" />
+    <Compile Include="Negocio\Decorator\Genero.cs" />
+    <Compile Include="Negocio\Observer\GraficoBarras.cs" />
     <Compile Include="Negocio\Handler_Mapas.cs" />
-    <Compile Include="Negocio\IGraficoSubscriptor.cs" />
-    <Compile Include="Negocio\Indicador.cs" />
+    <Compile Include="Negocio\Observer\IGraficoSubscriptor.cs" />
+    <Compile Include="Modelo\Indicador.cs" />
     <Compile Include="Negocio\Localizaciones.cs" />
-    <Compile Include="Negocio\Query.cs" />
-    <Compile Include="Negocio\QueryDecorador.cs" />
+    <Compile Include="Negocio\Decorator\Query.cs" />
+    <Compile Include="Negocio\Decorator\QueryDecorador.cs" />
     <Compile Include="Negocio\QueryDinamica.cs" />
-    <Compile Include="Negocio\TipoAfectado.cs" />
+    <Compile Include="Modelo\ResultadoDinamica.cs" />
+    <Compile Include="Negocio\Decorator\TipoAfectado.cs" />
     <Compile Include="Negocio\TipoIdentificador.cs" />
-    <Compile Include="Negocio\TipoLesion.cs" />
+    <Compile Include="Negocio\Decorator\TipoLesion.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -104,6 +109,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vista\TratarEnum.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -145,9 +151,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modelo\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\car-collision.png" />
   </ItemGroup>
@@ -172,7 +176,6 @@
   <ItemGroup>
     <Content Include="Resources\down.png" />
     <Content Include="Resources\down1.png" />
-    <Content Include="Vista\JavaScript1.js" />
     <None Include="Resources\plus_64.png" />
     <None Include="Resources\eliminar_64.png" />
     <Content Include="Resources\up.png" />
