@@ -145,7 +145,7 @@ namespace DashboardAccidentes.Negocio
             string tamanio = "&size=790,575";
             string marcador = "flag-";
 
-            string url = URL_base + keyMap + tamanio + tamanio + ubicaciones;
+            string url = URL_base + keyMap + tamanio + ubicaciones;
 
             if (!miIterador.tieneSiguiente())
             {
